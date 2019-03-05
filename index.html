@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Administrator: Command Prompted</title>
+<style>
+* {
+  font-family: Consolas,monaco,monospace; 
+  background-color: black;
+  color: white;
+  font-size: 16;
+  border: 0;
+  outline: none;
+}
+</style>
+</head>
+<body>
+<a id="output"></a>
+<div id="command">
+<br><label>C:\WINDOWS\system32></label><a style="white-space:pre" id="input"><a>
+</div>
+</body>
+<script>
+var commands = new Map();
+var colors  = new Map();
+
+colors.set('0', 'Black')
+     .set('1', 'Blue')
+     .set('2', 'Green')
+     .set('3', 'Aqua')
+     .set('4', 'Red')
+     .set('5', 'Purple')
+     .set('6', 'Yellow')
+     .set('7', 'White')
+     .set('8', 'Gray')
+     .set('9', 'LightBlue')
+     .set('a', 'LightGreen')
+     .set('b', 'Aqua')
+     .set('c', 'LightRed')
+     .set('d', 'LightPurple')
+     .set('e', 'LightYellow')
+     .set('f', 'White')
+
+function ColorParser(codes){
+codes = codes.toLowerCase();
+if(colors.has(codes[0])){
+document.body.style.color = colors.get(codes[0]);
+}
+if(color.has(colors[1])){
+document.body.style.backgroundColor = colors.get(colors[1]);
+}
+}
+    
+command = document.getElementById("command")
+output = document.getElementById("output");
+input = document.getElementById("input");
+
+function echo(line){
+output.innerText += "\n"+line;
+}
+
+document.addEventListener('keydown', function(e) {
+
+if(e.key.length === 1){
+input.innerText += e.key;
+return
+}
+txt = command.innerText.trim();
+switch(e.code) {
+  case "Enter":
+    echo(txt);
+    if(process(txt)){echo("");}
+    input.innerText = "";
+    break;
+  case "Backspace":
+    input.innerText = input.innerText.slice(0, -1);
+    break;
+  case "Space":
+    input.innerText += " ";
+    break;
+}
+});
+
+output.innerText = "Microsoft Windows [Version 10.0.17763.316]\n(c) 2018 Microsoft Corporation. All rights reserved.\n";
+
+// Process command c[0] (path), c[1] (command) 
+function process(command){
+tmp = command.split(/>(.*)/);
+
+path = tmp[0]; // C:\WINDOWS\system32
+c = tmp[1].split(" "); // echo,hello
+
+
+switch(c[0].toLowerCase()){
+  case "cls":
+    output.innerText = "";
+    return false;
+    break;
+  case "echo":
+    if(c[1]){echo(c[1])}else{echo("ECHO is on.")}
+    break;    
+  case "color":
+    ColorParser(c[1]);
+    break;
+  case "title":
+    if(c[1]){document.title = tmp[1]}
+    break;
+  case "cd":
+    if(args[1]){}else{echo(path)}
+  default:
+  if(!commands.has(c[0])){
+  echo("'"+c[0]+"' is not recognized as an internal or external command,\noperable program or batch file.");
+  }else{
+  echo(commands.get(c[0]));
+  } 
+}
+return true;
+}
+
+
+</script>
+</html>
