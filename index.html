@@ -109,7 +109,7 @@ output.innerText = "Microsoft Windows [Version 10.0.17763.316]\n(c) 2018 Microso
 function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
-    args = input.split(" "); // echo,hello,world 
+    args = input.innerText.split(" "); // echo,hello,world 
     if (args.length > 1) {
         displayable = args.shift().join();
     }
