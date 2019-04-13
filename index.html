@@ -27,14 +27,15 @@ var hcount = 0;
 var hdata = [];
 
 function history(old) {
-if(old){
-if(history > 0){
-hcount - 1;
-}else{
-if(history.length < hcount){
-hcount + 1;
-}
-input.innerText = history[hcount];
+    if (old) {
+        if (history > 0) {
+            hcount - 1;
+        }
+    } else {
+        if (history.length < hcount) {
+            hcount + 1;
+        }
+        input.innerText = history[hcount];
 }
   
 colors.set('0', 'Black')
