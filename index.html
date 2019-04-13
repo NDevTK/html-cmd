@@ -27,8 +27,9 @@ var hcount = 0;
 var hdata = [];
 
 function history(old) {
+    if(history.length < 1) return;
     if (old) {
-        if (history > 0) {
+        if (history > 1) {
             hcount - 1;
         }
     } else {
