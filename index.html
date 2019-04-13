@@ -27,16 +27,16 @@ var hcount = 0;
 var hdata = [];
 
 function history(old) {
-    if(history.length < 1) return;
+    if(hdata.length < 1) return;
     if (old) {
-        if (history > 1) {
+        if (hdata.length > 1) {
             hcount - 1;
         }
     } else {
-        if (history.length < hcount) {
+        if (hdata.length < hcount) {
             hcount + 1;
         }
-        input.innerText = history[hcount];
+        input.innerText = hdata[hcount];
     }
 }
 
