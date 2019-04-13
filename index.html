@@ -23,7 +23,20 @@ body {
 var help = new Map();
 var commands = new Map();
 var colors  = new Map();
-help.set('')
+var hcount = 0;
+var hdata = [];
+
+function history(old) {
+if(old){
+if(history > 0){
+hcount - 1;
+}else{
+if(history.length < hcount){
+hcount + 1;
+}
+input.innerText = history[hcount];
+}
+  
 colors.set('0', 'Black')
      .set('1', 'Blue')
      .set('2', 'Green')
@@ -70,6 +83,7 @@ switch(e.code) {
   case "Enter":
     echo(txt);
     if(process(txt)){echo("");}
+    hdata.push(input.innerText);
     input.innerText = "";
     break;
   case "Backspace":
@@ -78,41 +92,43 @@ switch(e.code) {
   case "Space":
     input.innerText += " ";
     break;
+  case "ArrowDown":
+    history(true);
+  case "ArrowUp":
+    history(false);
 }
 });
 
 output.innerText = "Microsoft Windows [Version 10.0.17763.316]\n(c) 2018 Microsoft Corporation. All rights reserved.\n";
 
-// Process command c[0] (path), c[1] (command) 
 function process(command){
-args = command.split(/>(.*)/);
-
-path = args[0]; // C:\WINDOWS\system32
-
-c = args[2].split(" "); // C:\WINDOWS\system32 echo hello world 
-
-
-switch(args[1].toLowerCase()){
+tmp = command.split(/>(.*)/);
+path = tmp[0]; // C:\WINDOWS\system32
+args = input.split(" "); // echo,hello,world 
+if(args.length > 1){
+displayable = args.shift().join();
+}
+switch(args[0].toLowerCase()){
   case "cls":
     output.innerText = "";
     return false;
     break;
   case "echo":
-    if(c){echo(c)}else{echo("ECHO is on.")}
-    break;    
+    if(c){echo(displayable)}else{echo("ECHO is on.")}
+    break;
   case "color":
-    ColorParser(c);
+    ColorParser(args);
     break;
   case "title":
-    if(c){document.title = c}
+    if(c){document.title = displayable}
     break;
   case "cd":
     break;
   default:
-  if(!commands.has(c[0])){
-  echo("'"+c[0]+"' is not recognized as an internal or external command,\noperable program or batch file.");
+  if(!commands.has(args[0])){
+  echo("'"+args[0]+"' is not recognized as an internal or external command,\noperable program or batch file.");
   }else{
-  echo(commands.get(c[0]));
+  echo(commands.get(args[0]));
   } 
 }
 return true;
