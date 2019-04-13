@@ -84,28 +84,29 @@ output.innerText = "Microsoft Windows [Version 10.0.17763.316]\n(c) 2018 Microso
 
 // Process command c[0] (path), c[1] (command) 
 function process(command){
-tmp = command.split(/>(.*)/);
+arguments = command.split(/>(.*)/);
 
-path = tmp[0]; // C:\WINDOWS\system32
-c = tmp[1].split(" "); // echo,hello
+path = args[0]; // C:\WINDOWS\system32
+
+c = args[2].split(" "); // C:\WINDOWS\system32 echo hello world 
 
 
-switch(c[0].toLowerCase()){
+switch(args[1].toLowerCase()){
   case "cls":
     output.innerText = "";
     return false;
     break;
   case "echo":
-    if(c[1]){echo(c[1])}else{echo("ECHO is on.")}
+    if(c){echo(c)}else{echo("ECHO is on.")}
     break;    
   case "color":
-    ColorParser(c[1]);
+    ColorParser(c);
     break;
   case "title":
-    if(c[1]){document.title = tmp[1]}
+    if(c){document.title = c}
     break;
   case "cd":
-    if(args[1]){}else{echo(path)}
+    break;
   default:
   if(!commands.has(c[0])){
   echo("'"+c[0]+"' is not recognized as an internal or external command,\noperable program or batch file.");
