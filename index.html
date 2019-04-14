@@ -70,7 +70,7 @@ function ColorParser(codes) {
 function getDisplayable(args){
     cargs = args; // Temp Copy
     cargs.shift(); // Remove command from cargs
-    return cargs.join();
+    return cargs.join(" ");
 }
 
 command = document.getElementById("command")
