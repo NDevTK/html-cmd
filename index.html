@@ -131,7 +131,7 @@ function process(command) {
             ColorParser(args);
             break;
         case "title":
-            if (c) {
+            if (args.length > 1) {
                 document.title = displayable
             }
             break;
