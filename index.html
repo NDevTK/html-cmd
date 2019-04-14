@@ -59,18 +59,16 @@ colors.set('0', 'Black')
 
 function ColorParser(codes) {
     codes = codes.toLowerCase();
-    if (colors.has(codes[0])) {
-        document.body.style.color = colors.get(codes[0]);
+    if (colors.has(codes[1])) {
+        document.body.style.color = colors.get(codes[1]);
     }
-    if (color.has(colors[1])) {
-        document.body.style.backgroundColor = colors.get(colors[1]);
+    if (color.has(colors[2])) {
+        document.body.style.backgroundColor = colors.get(colors[2]);
     }
 }
 
-function getDisplayable(args){
-    cargs = args; // Temp Copy
-    cargs.shift(); // Remove command from cargs
-    return cargs.join(" ");
+function getDisplayable(args, silce){
+    return args.slice(silce).join(" ");
 }
 
 command = document.getElementById("command")
@@ -116,14 +114,14 @@ function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
     args = input.innerText.split(" "); // echo,hello,world 
-    displayable = getDisplayable(args);
+    displayable = getDisplayable(args, 1);
     switch (args[0].toLowerCase()) {
         case "cls":
             output.innerText = "";
             return false;
             break;
         case "echo":
-            if (c) {
+            if (args.length > 1) {
                 echo(displayable)
             } else {
                 echo("ECHO is on.")
