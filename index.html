@@ -110,7 +110,7 @@ function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
     args = input.innerText.split(" "); // echo,hello,world 
-    if (args.length > 1) {
+    if (args.length > 0) {
         displayable = args.shift().join();
     }else{
         displayable = args.join();
