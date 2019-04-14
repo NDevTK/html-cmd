@@ -110,11 +110,9 @@ function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
     args = input.innerText.split(" "); // echo,hello,world 
-    if (args.length > 0) {
-        displayable = args.shift().join();
-    }else{
-        displayable = args.join();
-    }
+    cargs = args; // Temp Copy
+    cargs.shift(); // Remove command from cargs
+    displayable = cargs.join();
     switch (args[0].toLowerCase()) {
         case "cls":
             output.innerText = "";
