@@ -29,12 +29,12 @@ var hdata = [];
 function history(old) {
     if(hdata.length < 1) return;
     if (old) {
-        if (hdata.length > 1) {
-            hcount - 1;
+        if (hdata.length < hcount) {
+            hcount -= 1;
         }
     } else {
         if (hdata.length > hcount) {
-            hcount + 1;
+            hcount += 1;
         }
         input.innerText = hdata[hcount];
     }
