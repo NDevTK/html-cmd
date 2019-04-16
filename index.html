@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Administrator: Command Prompted</title>
 <style>
 body {
@@ -14,11 +13,11 @@ body {
 </style>
 </head>
 <body>
-<a id="output"></a>
+<a id="output">Microsoft Windows [Version 10.0.17763.316]<br>(c) 2018 Microsoft Corporation. All rights reserved.<br><br>C:\WINDOWS\system32&gt;a<br>'a' is not recognized as an internal or external command,<br>operable program or batch file.<br><br>C:\WINDOWS\system32&gt;b<br>'b' is not recognized as an internal or external command,<br>operable program or batch file.<br></a>
 <div id="command">
-<br><label>C:\WINDOWS\system32></label><a style="white-space:pre" id="input"><a>
-</div>
-</body>
+<br><label>C:\WINDOWS\system32&gt;</label><a style="white-space:pre" id="input"></a><a>
+</a></div><a>
+
 <script>
 var help = new Map();
 var commands = new Map();
@@ -29,15 +28,17 @@ var hdata = [];
 function history(down) {
     if(hdata.length < 1) return;
     if (down) {
-        if (hdata.length < hcount) {
-            hcount -= 1;
+        if (hcount > 1) {	
+        hcount -= 1;
+		input.innerText = hdata[hcount - 1];
         }
     } else {
         if (hdata.length > hcount) {
             hcount += 1;
-        }       
+			input.innerText = hdata[hdata.length - hcount];
+        }	
     }
-    input.innerText = hdata[hdata.length - hcount - 1];
+   
 }
 
 colors.set('0', 'Black')
@@ -147,4 +148,4 @@ function process(command) {
     return true;
 }
 </script>
-</html>
+</a></body></html>
