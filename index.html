@@ -135,10 +135,12 @@ function process(command) {
                 echo(displayable)
             } else {
                 echo("ECHO is on.")
+		return false
             }
             break;
         case "color":
             ColorParser(args);
+	    return false	    
             break;
         case "title":
             if (args.length > 1) {
