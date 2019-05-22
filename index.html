@@ -84,7 +84,11 @@ output = document.getElementById("output");
 input = document.getElementById("input");
 
 function echo(line) {
-    output.innerText += "\n" + line;
+    output.innerText += "\n" + line "\n";
+}
+
+function Newline(){
+output.innerText += "\n";
 }
 
 document.addEventListener('keydown', function(e) {
@@ -97,9 +101,12 @@ document.addEventListener('keydown', function(e) {
     switch (e.code) {
         case "Enter":
             echo(txt);
-            if (process(txt)) {
-                echo("");
-            }
+            responce = process(txt);
+            if(responce) {
+	        echo(responce);
+	    }else{
+	        Newline();
+	    }
             hdata.push(input.innerText);
             input.innerText = "";
             break;
@@ -132,21 +139,18 @@ function process(command) {
             break;
         case "echo":
             if (args.length > 1) {
-                echo(displayable)
+                return displayable)
             } else {
-                echo("ECHO is on.")
-		return false
+                return "ECHO is on."
             }
             break;
         case "color":
-            ColorParser(args);
-	    return false	    
+            ColorParser(args);	    
             break;
         case "title":
             if (args.length > 1) {
                 document.title = displayable
             }
-            return false;
             break;
         case "cd":
             break;
@@ -157,7 +161,6 @@ function process(command) {
                 echo(commands.get(args[0]));
             }
     }
-    return true;
 }
 </script>
 </a></body></html>
