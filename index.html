@@ -87,8 +87,8 @@ function echo(line) {
     output.innerText += line;
 }
 
-function Newline(){
-output.innerText += "\n";
+function NL(){
+    output.innerText += "\n";
 }
 
 document.addEventListener('keydown', function(e) {
@@ -100,14 +100,15 @@ document.addEventListener('keydown', function(e) {
     txt = command.innerText.trim();
     switch (e.code) {
         case "Enter":
+            NL();
             echo(txt);
-	    Newline()
+	    NL()
             responce = process(txt);
             if(responce) {
 	        echo(responce);
-		Newline()
+		NL()
 	    }else{
-	        Newline();
+	        NL();
 	    }
             hdata.push(input.innerText);
             input.innerText = "";
