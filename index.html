@@ -13,9 +13,9 @@ body {
 </style>
 </head>
 <body>
-<a id="output">Microsoft Windows [Version 10.0.17763.316]<br>(c) 2018 Microsoft Corporation. All rights reserved.<br><br>C:\WINDOWS\system32&gt;a<br>'a' is not recognized as an internal or external command,<br>operable program or batch file.<br><br>C:\WINDOWS\system32&gt;b<br>'b' is not recognized as an internal or external command,<br>operable program or batch file.<br></a>
+<a id="output">Microsoft Windows [Version 10.0.17763.504]<br>(c) 2018 Microsoft Corporation. All rights reserved.<br><br>C:\WINDOWS\system32&gt;a<br>'a' is not recognized as an internal or external command,<br>operable program or batch file.<br><br>C:\WINDOWS\system32&gt;b<br>'b' is not recognized as an internal or external command,<br>operable program or batch file.<br></a>
 <div id="command">
-<br><label>C:\WINDOWS\system32&gt;</label><a style="white-space:pre" id="input"></a><a>
+<br><label>C:\WINDOWS\system32</label><a style="white-space:pre" id="input"></a><a>
 </a></div><a>
 
 <script>
@@ -35,7 +35,7 @@ function history(down) {
     } else {
         if (hdata.length > hcount) {
             hcount += 1;
-			input.innerText = hdata[hdata.length - hcount];
+            input.innerText = hdata[hdata.length - hcount];
         }	
     }
    
@@ -58,8 +58,15 @@ colors.set('0', 'Black')
     .set('e', 'LightYellow')
     .set('f', 'White')
 
+function LowerCase(array){
+for(var i = 0; i < array.length; i++) {
+    array[i] = array[i].toLowerCase()
+}
+return array
+}
+
 function ColorParser(codes) {
-    codes = codes.toLowerCase();
+    codes = LowerCase(codes);
     if (colors.has(codes[1])) {
         document.body.style.color = colors.get(codes[1]);
     }
