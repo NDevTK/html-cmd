@@ -16,7 +16,7 @@ body {
 <a id="output">Microsoft Windows [Version 10.0.17763.504]<br>(c) 2018 Microsoft Corporation. All rights reserved.<br></a>
 <div id="command">
 <br><label>C:\WINDOWS\system32\&gt;</label><a style="white-space:pre" id="input"></a><a>
-</a></div><a>
+</a></div>
 
 <script>
 var help = new Map();
@@ -84,7 +84,7 @@ output = document.getElementById("output");
 input = document.getElementById("input");
 
 function echo(line) {
-    output.innerText += "\n" + line + "\n";
+    output.innerText += line + "\n";
 }
 
 function Newline(){
@@ -103,6 +103,7 @@ document.addEventListener('keydown', function(e) {
             echo(txt);
             responce = process(txt);
             if(responce) {
+		Newline();
 	        echo(responce);
 	    }else{
 	        Newline();
@@ -162,5 +163,4 @@ function process(command) {
             }
     }
 }
-</script>
-</a></body></html>
+</script></body></html>
