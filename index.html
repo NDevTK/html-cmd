@@ -73,7 +73,6 @@ function ColorParser(codes) {
     if (color.has(colors[2])) {
         document.body.style.backgroundColor = colors.get(colors[2]);
     }
-    echo("")
 }
 
 function getDisplayable(args, silce){
@@ -145,6 +144,7 @@ function process(command) {
             if (args.length > 1) {
                 document.title = displayable
             }
+            return false;
             break;
         case "cd":
             break;
