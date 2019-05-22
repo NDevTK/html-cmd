@@ -84,7 +84,7 @@ output = document.getElementById("output");
 input = document.getElementById("input");
 
 function echo(line) {
-    output.innerText += "\n" + line;
+    output.innerText += line;
 }
 
 function Newline(){
@@ -101,10 +101,11 @@ document.addEventListener('keydown', function(e) {
     switch (e.code) {
         case "Enter":
             echo(txt);
+	    Newline()
             responce = process(txt);
             if(responce) {
-		Newline();
 	        echo(responce);
+		Newline()
 	    }else{
 	        Newline();
 	    }
@@ -157,9 +158,9 @@ function process(command) {
             break;
         default:
             if (!commands.has(args[0])) {
-                echo("'" + args[0] + "' is not recognized as an internal or external command,\noperable program or batch file.");
+                return "'" + args[0] + "' is not recognized as an internal or external command,\noperable program or batch file.";
             } else {
-                echo(commands.get(args[0]));
+                return commands.get(args[0]);
             }
     }
 }
