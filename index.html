@@ -25,6 +25,15 @@ var colors = new Map();
 var hcount = 0;
 var hdata = [];
 
+function IsTouch() {
+    var match = window.matchMedia || window.msMatchMedia;
+    if(match) {
+        var mq = match("(pointer:coarse)");
+        return mq.matches;
+    }
+    return false;
+}
+
 function history(down) {
     if(hdata.length < 1) return;
     if (down) {
@@ -82,6 +91,12 @@ function getDisplayable(args, silce){
 command = document.getElementById("command")
 output = document.getElementById("output");
 input = document.getElementById("input");
+
+if(IsTouch){
+input.isContentEditable = true;
+command.addEventListener('ontouchend', function(e) {
+    input.focus();
+}}
 
 function echo(line) {
     output.innerText += line;
