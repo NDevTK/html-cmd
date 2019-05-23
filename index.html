@@ -14,7 +14,7 @@ body {
 </head>
 <body>
 <a id="output">Microsoft Windows [Version 10.0.17763.504]<br>(c) 2018 Microsoft Corporation. All rights reserved.<br></a>
-<div id="command">
+<div id="command" onclick="OSK()">
 <br><label>C:\WINDOWS\system32\&gt;</label><a style="white-space:pre" id="input"></a><a>
 </a></div>
 
@@ -94,11 +94,13 @@ input = document.getElementById("input");
 
 if(IsTouch){
 input.isContentEditable = true;
-command.addEventListener('onclick', function(e) {
-    input.focus();
-});
 }
 
+function OSK(){
+if(IsTouch){
+input.focus();
+}}
+	
 function echo(line) {
     output.innerText += line;
 }
