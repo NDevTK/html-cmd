@@ -96,6 +96,12 @@ function ColorParser(codes) {
 function getDisplayable(args, silce){
     return args.slice(silce).join(" ");
 }
+async funnction HELPCommand(command){
+await reply = HELP();
+EchoLine(reply);
+SeparateLine("For more information on tools see the command-line reference in the online help.");
+return
+}
 
 command = document.getElementById("command")
 output = document.getElementById("output");
@@ -114,7 +120,18 @@ function echo(line) {
     return output.innerText += line;
 }
 
-function NL(){
+function SeparateLine(line) {
+    NewLine();
+    echo(line);
+    NewLine();
+}
+
+function EchoLine(line) {
+    NewLine();
+    echo(line);
+}
+
+function NewLine(){
     output.innerText += "\n";
 }
 
@@ -127,15 +144,8 @@ document.addEventListener('keydown', function(e) {
     txt = command.innerText.trim();
     switch (e.code) {
         case "Enter":
-            NL();
-            echo(txt);
-            responce = process(txt);
-            if(responce) {
-	        echo(responce);
-		NL()
-	    }else{
-	        NL();
-	    }
+            NewLine();
+            EchoLine(txt);
             hdata.push(input.innerText);
             input.innerText = "";
             break;
@@ -156,6 +166,10 @@ document.addEventListener('keydown', function(e) {
 
 output.innerText = "Microsoft Windows [Version 10.0.17763.316]\n(c) 2018 Microsoft Corporation. All rights reserved.\n";
 
+function EndCommand(){
+
+}
+
 function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
@@ -164,7 +178,7 @@ function process(command) {
     switch (args[0].toLowerCase()) {
         case "cls":
             output.innerText = "";
-            return false;
+            NewLine();
             break;
         case "echo":
             if (args.length > 1) {
@@ -178,9 +192,7 @@ function process(command) {
             break;
 	
 	case "help":
-	    echo("For more information on a specific command, type HELP command-name");
-            HELP().then(res => echo(res));
-            return "For more information on tools see the command-line reference in the online help."
+            HELPCommand(args[1])
             break;
 		 
         case "title":
