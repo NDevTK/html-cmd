@@ -180,9 +180,9 @@ function process(command) {
 	
 	case "help":
             if (args.length > 1) {
-            HELP(args[2]);
+            HELP(args[2]).then(res => echo(res));
             }
-            HELP();
+            HELP().then(res => echo(res));
         break;
 		 
         case "title":
