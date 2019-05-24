@@ -96,11 +96,12 @@ function ColorParser(codes) {
 function getDisplayable(args, silce){
     return args.slice(silce).join(" ");
 }
-async funnction HELPCommand(command){
+
+async function HELPCommand(command){
 await reply = HELP();
 EchoLine(reply);
 SeparateLine("For more information on tools see the command-line reference in the online help.");
-return
+return;
 }
 
 command = document.getElementById("command")
@@ -144,7 +145,6 @@ document.addEventListener('keydown', function(e) {
     txt = command.innerText.trim();
     switch (e.code) {
         case "Enter":
-            NewLine();
             EchoLine(txt);
             hdata.push(input.innerText);
             input.innerText = "";
@@ -165,10 +165,6 @@ document.addEventListener('keydown', function(e) {
 });
 
 output.innerText = "Microsoft Windows [Version 10.0.17763.316]\n(c) 2018 Microsoft Corporation. All rights reserved.\n";
-
-function EndCommand(){
-
-}
 
 function process(command) {
     tmp = command.split(/>(.*)/);
