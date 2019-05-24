@@ -98,7 +98,7 @@ function getDisplayable(args, silce){
 }
 
 async function HELPCommand(command){
-await reply = HELP();
+reply = await HELP();
 EchoLine(reply);
 SeparateLine("For more information on tools see the command-line reference in the online help.");
 return;
@@ -174,7 +174,6 @@ function process(command) {
     switch (args[0].toLowerCase()) {
         case "cls":
             output.innerText = "";
-            NewLine();
             break;
         case "echo":
             if (args.length > 1) {
