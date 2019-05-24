@@ -110,8 +110,8 @@ if(IsTouch){
 input.focus();
 }}
 	
-async function echo(line) {
-    return await output.innerText += line;
+function echo(line) {
+    return output.innerText += line;
 }
 
 function NL(){
@@ -157,11 +157,7 @@ document.addEventListener('keydown', function(e) {
 
 output.innerText = "Microsoft Windows [Version 10.0.17763.316]\n(c) 2018 Microsoft Corporation. All rights reserved.\n";
 
-function isPromise(value) {
-  return Boolean(value && typeof value.then === 'function');
-}
-
-async function process(command) {
+function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
     args = input.innerText.split(" "); // echo,hello,world 
@@ -172,7 +168,6 @@ async function process(command) {
             return false;
             break;
         case "echo":
-            
             if (args.length > 1) {
                 return displayable
             } else {
@@ -185,9 +180,9 @@ async function process(command) {
 	
 	case "help":
             if (args.length > 1) {
-            return await HELP(args[2])
+            HELP(args[2]);
             }
-            return await HELP();
+            HELP();
         break;
 		 
         case "title":
