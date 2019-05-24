@@ -46,7 +46,7 @@ function IsTouch() {
 function history(down) {
     if(hdata.length < 1) return;
     if (down) {
-        if (hcount > 1) {	
+        if (hcount > 1) {
             hcount -= 1;
 	    input.innerText = hdata[hdata.length - hcount];
         }
@@ -179,9 +179,6 @@ function process(command) {
             break;
 	
 	case "help":
-            if (args.length > 1) {
-            HELP(args[2]).then(res => echo(res));
-            }
             HELP().then(res => echo(res));
         break;
 		 
