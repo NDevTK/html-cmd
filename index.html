@@ -200,9 +200,9 @@ function process(command) {
             break;
         default:
             if (!commands.has(args[0])) {
-                NewLine("'" + args[0] + "' is not recognized as an internal or external command,\noperable program or batch file.");
+                EchoLine("'" + args[0] + "' is not recognized as an internal or external command,\noperable program or batch file.");
             } else {
-                NewLine(commands.get(args[0]));
+                EchoLine(commands.get(args[0]));
             }
     }
 }
