@@ -129,7 +129,6 @@ document.addEventListener('keydown', function(e) {
         case "Enter":
             NL();
             echo(txt);
-	    NL()
             responce = process(txt);
             if(responce) {
 	        echo(responce);
@@ -179,7 +178,9 @@ function process(command) {
             break;
 	
 	case "help":
+	    echo("For more information on a specific command, type HELP command-name");
             HELP().then(res => echo(res));
+            return "For more information on tools see the command-line reference in the online help."
             break;
 		 
         case "title":
