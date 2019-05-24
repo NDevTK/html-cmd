@@ -111,7 +111,7 @@ input.focus();
 }}
 	
 function echo(line) {
-    output.innerText += line;
+    return await output.innerText += line;
 }
 
 function NL(){
@@ -157,6 +157,10 @@ document.addEventListener('keydown', function(e) {
 
 output.innerText = "Microsoft Windows [Version 10.0.17763.316]\n(c) 2018 Microsoft Corporation. All rights reserved.\n";
 
+function isPromise(value) {
+  return Boolean(value && typeof value.then === 'function');
+}
+
 async function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
@@ -168,6 +172,7 @@ async function process(command) {
             return false;
             break;
         case "echo":
+            
             if (args.length > 1) {
                 return displayable
             } else {
