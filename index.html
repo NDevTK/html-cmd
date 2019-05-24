@@ -19,6 +19,16 @@ body {
 </a></div>
 
 <script>
+
+async function HELP(command){
+UpperCaseCommand = command.toUpperCase();
+command ? end="RAW/"+UpperCaseCommand : end="Summary";
+resp = await fetch("https://cmddoc.ndev.tk/"+end);
+if(!resp.ok) return 'This command is not supported by the help utility.  Try "'+command+' /?".'
+text = await resp.text();
+return text;
+}
+
 var help = new Map();
 var commands = new Map();
 var colors = new Map();
@@ -148,7 +158,7 @@ document.addEventListener('keydown', function(e) {
 
 output.innerText = "Microsoft Windows [Version 10.0.17763.316]\n(c) 2018 Microsoft Corporation. All rights reserved.\n";
 
-function process(command) {
+async function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
     args = input.innerText.split(" "); // echo,hello,world 
@@ -168,6 +178,14 @@ function process(command) {
         case "color":
             ColorParser(args);	    
             break;
+	
+	case "help":
+            if (args.length > 1) {
+            return await HELP(args[2])
+            }
+            return await HELP();
+        break;
+		 
         case "title":
             if (args.length > 1) {
                 document.title = displayable
