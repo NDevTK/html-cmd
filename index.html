@@ -15,7 +15,7 @@ body {
 <body>
 <a id="output">Microsoft Windows [Version 10.0.17763.504]<br>(c) 2018 Microsoft Corporation. All rights reserved.<br></a>
 <br><div id="command" onclick="OSK()"><br>
-<label>C:\WINDOWS\system32\&gt;</label><a style="white-space:pre" id="input"></a><a><br>
+<label>C:\WINDOWS\system32\&gt;</label><a style="white-space:pre" id="input"></a><a>
 </a></div>
 
 <script>
@@ -145,7 +145,7 @@ document.addEventListener('keydown', function(e) {
     txt = command.innerText.trim();
     switch (e.code) {
         case "Enter":
-            EchoLine(txt);
+            EchoLine(command.innerText);
 	    process(txt);
             hdata.push(input.innerText);
             input.innerText = "";
