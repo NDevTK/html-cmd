@@ -13,8 +13,8 @@ body {
 </style>
 </head>
 <body>
-<a id="output">Microsoft Windows [Version 10.0.17763.504]<br>(c) 2018 Microsoft Corporation. All rights reserved.<br></a>
-<br><div id="command" onclick="OSK()">
+<a id="output">Microsoft Windows [Version 10.0.17763.504]<br>(c) 2018 Microsoft Corporation. All rights reserved.<br></a><br>
+<br><div id="command" onclick="OSK()"><br>
 <label>C:\WINDOWS\system32\&gt;</label><a style="white-space:pre" id="input"></a><a>
 </a></div>
 
@@ -98,7 +98,7 @@ function getDisplayable(args, silce){
 }
 
 async function HELPCommand(command){
-reply = await HELP();
+reply = await HELP(command);
 EchoLine(reply);
 SeparateLine("For more information on tools see the command-line reference in the online help.");
 return;
@@ -127,9 +127,9 @@ function SeparateLine(line) {
     NewLine();
 }
 
-function EchoLine(line) {  
-    echo(line);
+function EchoLine(line) {
     NewLine();
+    echo(line);
 }
 
 function NewLine(){
