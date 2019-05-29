@@ -9,6 +9,7 @@ async function HELP(command) {
     resp = await fetch("https://cmddoc.ndev.tk/" + end);
     if (!resp.ok) return 'This command is not supported by the help utility.  Try "' + command + ' /?".'
     text = await resp.text();
+    
     return text;
 }
 var help = new Map();
@@ -81,7 +82,6 @@ function getDisplayable(args, silce) {
 async function HELPCommand(command) {
     reply = await HELP(command);
     EchoLine(reply);
-    SeparateLine("For more information on tools see the command-line reference in the online help.");
     return;
 }
 command = document.getElementById("command")
