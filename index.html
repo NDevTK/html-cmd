@@ -13,12 +13,19 @@ body {
 </style>
 </head>
 <body>
-<a id="output">Microsoft Windows [Version 10.0.17763.504]<br>(c) 2018 Microsoft Corporation. All rights reserved.</a>
+<a id="output"></a>
 <div id="command" onclick="OSK()"><br>
 <label>C:\WINDOWS\system32\&gt;</label><a style="white-space:pre" id="input"></a><a>
 </a></div>
 
 <script>
+Header();
+
+function Header(version = 10.0.18362.116, year = 2019){
+output.innerText = 
+`Microsoft Windows [Version ${version}]
+(c) ${year} Microsoft Corporation. All rights reserved.`
+}
 
 async function HELP(command){
 command ? end="RAW/"+command.toUpperCase() : end="Summary";
@@ -122,18 +129,15 @@ function echo(line) {
 }
 
 function SeparateLine(line) {
-    NewLine();
-    echo(line);
-    NewLine();
+    echo("\n"+line+"\n");
 }
 
 function EchoLine(line) {
-    NewLine();
-    echo(line);
+    echo("\n"+line);
 }
 
 function NewLine(){
-    output.innerText += "\n";
+    echo("\n");
 }
 
 document.addEventListener('keydown', function(e) {
@@ -178,9 +182,9 @@ function process(command) {
             break;
         case "echo":
             if (args.length > 1) {
-                return displayable
+                EchoLine(displayable);
             } else {
-                return "ECHO is on."
+                EchoLine("ECHO is on.")
             }
             break;
         case "color":
