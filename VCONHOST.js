@@ -8,8 +8,7 @@ async function HELP(command) {
     command ? end = "RAW/" + command.toUpperCase() : end = "Summary";
     resp = await fetch("https://cmddoc.ndev.tk/" + end);
     if (!resp.ok) return 'This command is not supported by the help utility.  Try "' + command + ' /?".'
-    text = await resp.text();
-    
+    text = await resp.text();   
     return text;
 }
 var help = new Map();
@@ -71,7 +70,7 @@ function ColorParser(codes) {
     if (colors.has(codes[1])) {
         document.body.style.color = colors.get(codes[1]);
     }
-    if (color.has(colors[2])) {
+    if (colors.has(colors[2])) {
         document.body.style.backgroundColor = colors.get(colors[2]);
     }
 }
