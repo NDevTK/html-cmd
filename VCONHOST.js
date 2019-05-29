@@ -1,5 +1,3 @@
-Header();
-
 function Header(version = "10.0.18362.116", year = 2019) {
 output.innerText =
 `Microsoft Windows [Version ${version}]
@@ -88,6 +86,7 @@ async function HELPCommand(command) {
 }
 command = document.getElementById("command")
 output = document.getElementById("output");
+Header();
 input = document.getElementById("input");
 if (IsTouch) {
     input.isContentEditable = true;
