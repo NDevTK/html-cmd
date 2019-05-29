@@ -5,7 +5,7 @@ output.innerText =
 }
 
 async function HELP(command) {
-    command ? end = "RAW/" + command.toUpperCase() : end = "Summary";
+    end = (command) ? "RAW/" + command.toUpperCase() : "Summary";
     resp = await fetch("https://cmddoc.ndev.tk/" + end);
     if (!resp.ok) return 'This command is not supported by the help utility.  Try "' + command + ' /?".'
     text = await resp.text();   
