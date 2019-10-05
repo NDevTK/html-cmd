@@ -7,10 +7,6 @@ body {
   outline: none;
 }
 
-::-moz-selection {
-  color: white;
-}
-
 ::selection {
-  color: white;
+  background: white;
 }
