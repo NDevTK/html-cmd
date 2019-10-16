@@ -28,13 +28,35 @@ async function Header(version = "10.0.18362.388", year = 2019) {
 		navigator.clipboard.readText().then(text => {
 			input.innerText += text;
 		});
-    }
+	}
+  
+  function NSL(domain, ip) {
+    return `Server:  dns.google
+    Address:  8.8.8.8
+    
+    Non-authoritative answer:
+    Name:    ${domain}
+    Addresses:  ${ip}`
+  }
+
+  function NSLFail(domain) {
+    return `Server:  dns.google
+    Address:  8.8.8.8
+    
+    *** dns.google can't find ${domain}: Non-existent domain`
+  }
+
+  async function nslookup(domain) {
+    var response = await fetch('https://dns.google/resolve?name='.concat(encodeURI(domain)));
+    var json = await response.json();
+    return (json.status === 0) ? NSL(domain, json.Answer[0].data) : NSLFail(domain);
+	}
 
     function telnet(address) {
         tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
         clear();
         setRunning("telnet");
-        tShocket.onopen = function (event) {
+        tShocket.onopen = function () {
             tShocket.send(address); 
         };
         tShocket.onmessage = function (event) {
@@ -165,12 +187,12 @@ async function Header(version = "10.0.18362.388", year = 2019) {
     output.innerText = "";
     }
 
-    function setRunning(name = false) {
+    async function setRunning(name = false) {
      dir.hidden = (name);
      running = name;
     }
 
-    function process(command) {
+    async function process(command) {
         if(running) {
             switch(running) {
                 case "telnet":
@@ -192,7 +214,13 @@ async function Header(version = "10.0.18362.388", year = 2019) {
                 } else {
                     HELP("telnet");
                 }
-                break;   
+                break;
+            case "nslookup":
+                if (args.length > 1 && args.length < 3) {
+                    nslookup(args[1]);
+                } else {
+                    HELP("nslookup");
+                }
             case "echo":
                 if (args.length > 1) {
                     EchoLine(displayable);
