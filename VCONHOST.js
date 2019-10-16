@@ -222,6 +222,7 @@ async function process(command) {
             } else {
                 HELP("nslookup");
             }
+            break;
             case "echo":
                 if (args.length > 1) {
                     EchoLine(displayable);
