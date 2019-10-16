@@ -47,12 +47,13 @@ async function Header(version = "10.0.18362.388", year = 2019) {
   }
 
   async function nslookup(domain) {
-    var response = await fetch('https://dns.google/resolve?name='.concat(encodeURI(domain)));
-    var json = await response.json();
-    return (json.status === 0) ? NSL(domain, json.Answer[0].data) : NSLFail(domain);
-	}
+    let response = await fetch('https://dns.google/resolve?name='.concat(encodeURI(domain)));
+    let json = await response.json();
+    let result = (json.status === 0) ? NSL(domain, json.Answer[0].data) : NSLFail(domain);
+    EchoLine(result);
+  }
 
-    function telnet(address) {
+  function telnet(address) {
         tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
         clear();
         setRunning("telnet");
@@ -62,7 +63,7 @@ async function Header(version = "10.0.18362.388", year = 2019) {
         tShocket.onmessage = function (event) {
             EchoLine(event.data);
         };
-    }
+  }
 
     function IsTouch() {
         var match = window.matchMedia || window.msMatchMedia;
