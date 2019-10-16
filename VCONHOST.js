@@ -1,227 +1,227 @@
 async function Header(version = "10.0.18362.388", year = 2019) {
     output.innerText =
-    `Microsoft Windows [Version ${version}]
+        `Microsoft Windows [Version ${version}]
     (c) ${year} Microsoft Corporation. All rights reserved.`
-    }
-    
-    async function HELPLookup(command) {
-        end = (command) ? "RAW/" + command.toUpperCase() : "Summary";
-        resp = await fetch("https://cmddoc.ndev.tk/" + end);
-        if (!resp.ok) return 'This command is not supported by the help utility.  Try "' + command + ' /?".'
-        text = await resp.text();   
-        return text;
-    }
-    var help = new Map();
-    var commands = new Map();
-    var colors = new Map();
-    var hcount = 0;
-    var hdata = [];
-	var running = false;
-	
-	document.addEventListener('contextmenu', function(ev) {
-		ev.preventDefault();
-		insert_clipboard();
-		return false;
-	}, false);
+}
 
-    function insert_clipboard() {
-		navigator.clipboard.readText().then(text => {
-			input.innerText += text;
-		});
-	}
-  
-  function NSL(domain, ip) {
+async function HELPLookup(command) {
+    end = (command) ? "RAW/" + command.toUpperCase() : "Summary";
+    resp = await fetch("https://cmddoc.ndev.tk/" + end);
+    if (!resp.ok) return 'This command is not supported by the help utility.  Try "' + command + ' /?".'
+    text = await resp.text();
+    return text;
+}
+
+help = new Map();
+commands = new Map();
+colors = new Map();
+hcount = 0;
+hdata = [];
+running = false;
+
+document.addEventListener('contextmenu', function(ev) {
+    ev.preventDefault();
+    insert_clipboard();
+    return false;
+}, false);
+
+function insert_clipboard() {
+    navigator.clipboard.readText().then(text => {
+        input.innerText += text;
+    });
+}
+
+function NSL(domain, ip) {
     return `Server:  dns.google
     Address:  8.8.8.8
     
     Non-authoritative answer:
     Name:    ${domain}
     Addresses:  ${ip}`
-  }
+}
 
-  function NSLFail(domain) {
+function NSLFail(domain) {
     return `Server:  dns.google
     Address:  8.8.8.8
     
     *** dns.google can't find ${domain}: Non-existent domain`
-  }
+}
 
-  async function nslookup(domain) {
+async function nslookup(domain) {
     let response = await fetch('https://dns.google/resolve?name='.concat(encodeURI(domain)));
     let json = await response.json();
-    let result = (json.status === 0) ? NSL(domain, json.Answer[0].data) : NSLFail(domain);
+    let result = (json.Status === 0) ? NSL(domain, json.Answer[0].data) : NSLFail(domain);
     EchoLine(result);
-  }
+}
 
-  function telnet(address) {
-        tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
-        clear();
-        setRunning("telnet");
-        tShocket.onopen = function () {
-            tShocket.send(address); 
-        };
-        tShocket.onmessage = function (event) {
-            EchoLine(event.data);
-        };
-  }
+function telnet(address) {
+    tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
+    clear();
+    setRunning("telnet");
+    tShocket.onopen = function() {
+        tShocket.send(address);
+    };
+    tShocket.onmessage = function(event) {
+        EchoLine(event.data);
+    };
+}
 
-    function IsTouch() {
-        var match = window.matchMedia || window.msMatchMedia;
-        if (match) {
-            var mq = match("(pointer:coarse)");
-            return mq.matches;
-        }
-        return false;
+function IsTouch() {
+    var match = window.matchMedia || window.msMatchMedia;
+    if (match) {
+        var mq = match("(pointer:coarse)");
+        return mq.matches;
     }
-    
-    function history(down) {
-        if (hdata.length < 1) return;
-        if (down) {
-            if (hcount > 1) {
-                hcount -= 1;
-                input.innerText = hdata[hdata.length - hcount];
-            }
-        } else {
-            if (hdata.length > hcount) {
-                hcount += 1;
-                input.innerText = hdata[hdata.length - hcount];
-            }
+    return false;
+}
+
+function history(down) {
+    if (hdata.length < 1) return;
+    if (down) {
+        if (hcount > 1) {
+            hcount -= 1;
+            input.innerText = hdata[hdata.length - hcount];
         }
-    
-    }
-    colors.set('0', 'Black')
-        .set('1', 'Blue')
-        .set('2', 'Green')
-        .set('3', 'Aqua')
-        .set('4', 'Red')
-        .set('5', 'Purple')
-        .set('6', 'Yellow')
-        .set('7', 'White')
-        .set('8', 'Gray')
-        .set('9', 'LightBlue')
-        .set('a', 'Green')
-        .set('b', 'Aqua')
-        .set('c', 'LightRed')
-        .set('d', 'LightPurple')
-        .set('e', 'LightYellow')
-        .set('f', 'White')
-    
-    function LowerCase(array) {
-        for (var i = 0; i < array.length; i++) {
-            array[i] = array[i].toLowerCase()
-        }
-        return array
-    }
-    
-    function ColorParser(codes) {
-        codes = LowerCase(codes);
-        if (colors.has(codes[1])) {
-            document.body.style.color = colors.get(codes[1]);
-        }
-        if (colors.has(colors[2])) {
-            document.body.style.backgroundColor = colors.get(colors[2]);
+    } else {
+        if (hdata.length > hcount) {
+            hcount += 1;
+            input.innerText = hdata[hdata.length - hcount];
         }
     }
-    
-    function getDisplayable(args, silce) {
-        return args.slice(silce).join(" ");
+
+}
+colors.set('0', 'Black')
+    .set('1', 'Blue')
+    .set('2', 'Green')
+    .set('3', 'Aqua')
+    .set('4', 'Red')
+    .set('5', 'Purple')
+    .set('6', 'Yellow')
+    .set('7', 'White')
+    .set('8', 'Gray')
+    .set('9', 'LightBlue')
+    .set('a', 'Green')
+    .set('b', 'Aqua')
+    .set('c', 'LightRed')
+    .set('d', 'LightPurple')
+    .set('e', 'LightYellow')
+    .set('f', 'White')
+
+function LowerCase(array) {
+    for (var i = 0; i < array.length; i++) {
+        array[i] = array[i].toLowerCase()
     }
-    async function HELP(command) {
-        reply = await HELPLookup(command);
-        EchoLine(reply);
-        return;
+    return array
+}
+
+function ColorParser(codes) {
+    codes = LowerCase(codes);
+    if (colors.has(codes[1])) {
+        document.body.style.color = colors.get(codes[1]);
     }
-    command = document.getElementById("command")
-    output = document.getElementById("output");
-    Header();
-    input = document.getElementById("input");
+    if (colors.has(colors[2])) {
+        document.body.style.backgroundColor = colors.get(colors[2]);
+    }
+}
+
+function getDisplayable(args, silce) {
+    return args.slice(silce).join(" ");
+}
+async function HELP(command) {
+    reply = await HELPLookup(command);
+    EchoLine(reply);
+    return;
+}
+
+Header();
+if (IsTouch) {
+    input.isContentEditable = true;
+}
+
+function OSK() {
     if (IsTouch) {
-        input.isContentEditable = true;
+        input.focus();
     }
-    
-    function OSK() {
-        if (IsTouch) {
-            input.focus();
-        }
+}
+
+function echo(line) {
+    return output.innerText += line;
+}
+
+function EchoLine(line) {
+    echo("\n" + line);
+}
+
+function NewLine() {
+    echo("\n");
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key.length === 1) {
+        input.innerText += e.key;
+        return
     }
-    
-    function echo(line) {
-        return output.innerText += line;
+    txt = command.innerText.trim();
+    switch (e.code) {
+        case "Enter":
+            EchoLine(command.innerText);
+            process(txt);
+            hdata.push(input.innerText);
+            input.innerText = "";
+            break;
+        case "Backspace":
+            input.innerText = input.innerText.slice(0, -1);
+            break;
+        case "Space":
+            input.innerText += " ";
+            break;
+        case "ArrowDown":
+            history(true);
+            break;
+        case "ArrowUp":
+            history(false);
+            break;
     }
-    
-    function EchoLine(line) {
-        echo("\n" + line);
-    }
-    
-    function NewLine() {
-        echo("\n");
-    }
-    document.addEventListener('keydown', function(e) {
-        if (e.key.length === 1) {
-            input.innerText += e.key;
-            return
-        }
-        txt = command.innerText.trim();
-        switch (e.code) {
-            case "Enter":
-                EchoLine(command.innerText);
-                process(txt);
-                hdata.push(input.innerText);
-                input.innerText = "";
-                break;
-            case "Backspace":
-                input.innerText = input.innerText.slice(0, -1);
-                break;
-            case "Space":
-                input.innerText += " ";
-                break;
-            case "ArrowDown":
-                history(true);
-                break;
-            case "ArrowUp":
-                history(false);
-                break;
-        }
-    });
-    
-    function clear() {
+});
+
+function clear() {
     output.innerText = "";
-    }
+}
 
-    async function setRunning(name = false) {
-     dir.hidden = (name);
-     running = name;
-    }
+async function setRunning(name = false) {
+    dir.hidden = (name);
+    running = name;
+}
 
-    async function process(command) {
-        if(running) {
-            switch(running) {
-                case "telnet":
-                    tShocket.send(input.innerText);
-                    break;
-            }
+async function process(command) {
+    if (running) {
+        switch (running) {
+            case "telnet":
+                tShocket.send(input.innerText);
+                break;
         }
-        tmp = command.split(/>(.*)/);
-        path = tmp[0]; // C:\WINDOWS\system32
-        args = input.innerText.split(" "); // echo,hello,world 
-        displayable = getDisplayable(args, 1);
-        switch (args[0].toLowerCase()) {
-            case "cls":
-                clear();
-                break;
-           case "telnet":
-                if (args.length > 1 && args.length < 4) {
-                    telnet(args[1]);
-                } else {
-                    HELP("telnet");
-                }
-                break;
-            case "nslookup":
-                if (args.length > 1 && args.length < 3) {
-                    nslookup(args[1]);
-                } else {
-                    HELP("nslookup");
-                }
+    }
+    tmp = command.split(/>(.*)/);
+    path = tmp[0]; // C:\WINDOWS\system32
+    args = input.innerText.split(" "); // echo,hello,world 
+    displayable = getDisplayable(args, 1);
+    switch (args[0].toLowerCase()) {
+        case "cls":
+            clear();
+            break;
+        case "telnet":
+            if (args.length > 1 && args.length < 4) {
+                telnet(args[1]);
+            } else {
+                HELP("telnet");
+            }
+            break;
+        case "nslookup":
+            if (args.length > 1 && args.length < 3) {
+                await nslookup(args[1]);
+            } else {
+                HELP("nslookup");
+            }
             case "echo":
                 if (args.length > 1) {
                     EchoLine(displayable);
@@ -232,11 +232,11 @@ async function Header(version = "10.0.18362.388", year = 2019) {
             case "color":
                 ColorParser(args);
                 break;
-    
+
             case "help":
                 HELP(args[1])
                 break;
-    
+
             case "title":
                 if (args.length > 1) {
                     document.title = displayable
@@ -250,5 +250,5 @@ async function Header(version = "10.0.18362.388", year = 2019) {
                 } else {
                     EchoLine(commands.get(args[0]));
                 }
-        }
     }
+}
