@@ -38,7 +38,7 @@ async function Header(version = "10.0.18362.388", year = 2019) {
             tShocket.send(address); 
         };
         tShocket.onmessage = function (event) {
-            EchoLine(event);
+            EchoLine(event.data);
         };
     }
 
