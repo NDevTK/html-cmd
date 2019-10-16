@@ -176,6 +176,13 @@ async function Header(version = "10.0.18362.388", year = 2019) {
             case "cls":
                 clear();
                 break;
+           case "telnet":
+                if (args.length > 1 && args.length < 4) {
+                    telnet(args[1]);
+                } else {
+                    HELP("telnet");
+                }
+                break;   
             case "echo":
                 if (args.length > 1) {
                     EchoLine(displayable);
