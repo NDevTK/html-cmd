@@ -16,7 +16,22 @@ async function Header(version = "10.0.18362.388", year = 2019) {
     var colors = new Map();
     var hcount = 0;
     var hdata = [];
-    
+    var running = false;
+
+
+
+    function telnet(address) {
+        tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
+        clear();
+        setRunning("telnet");
+        tShocket.onopen = function (event) {
+            tShocket.send(address); 
+        };
+        tShocket.onmessage = function (event) {
+            EchoLine(event);
+        };
+    }
+
     function IsTouch() {
         var match = window.matchMedia || window.msMatchMedia;
         if (match) {
@@ -101,10 +116,6 @@ async function Header(version = "10.0.18362.388", year = 2019) {
         return output.innerText += line;
     }
     
-    function SeparateLine(line) {
-        echo("\n" + line + "\n");
-    }
-    
     function EchoLine(line) {
         echo("\n" + line);
     }
@@ -140,14 +151,30 @@ async function Header(version = "10.0.18362.388", year = 2019) {
         }
     });
     
+    function clear() {
+    output.innerText = "";
+    }
+
+    function setRunning(name = false) {
+     dir.hidden = (name);
+     running = name;
+    }
+
     function process(command) {
+        if(running) {
+            switch(running) {
+                case "telnet":
+                    tShocket.send(input.innerText);
+                    break;
+            }
+        }
         tmp = command.split(/>(.*)/);
         path = tmp[0]; // C:\WINDOWS\system32
         args = input.innerText.split(" "); // echo,hello,world 
         displayable = getDisplayable(args, 1);
         switch (args[0].toLowerCase()) {
             case "cls":
-                output.innerText = "";
+                clear();
                 break;
             case "echo":
                 if (args.length > 1) {
