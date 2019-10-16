@@ -62,7 +62,7 @@ function telnet(address) {
         tShocket.send(address);
     };
     tShocket.onmessage = function(event) {
-        if(event.data.includes("[h")) clear();
+        if(event.data.includes("[H")) clear();
         EchoLine(event.data);
     };
 }
