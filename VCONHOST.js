@@ -16,9 +16,19 @@ async function Header(version = "10.0.18362.388", year = 2019) {
     var colors = new Map();
     var hcount = 0;
     var hdata = [];
-    var running = false;
+	var running = false;
+	
+	document.addEventListener('contextmenu', function(ev) {
+		ev.preventDefault();
+		insert_clipboard();
+		return false;
+	}, false);
 
-
+    function insert_clipboard() {
+		navigator.clipboard.readText().then(text => {
+			input.innerText += text;
+		});
+    }
 
     function telnet(address) {
         tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
@@ -213,4 +223,3 @@ async function Header(version = "10.0.18362.388", year = 2019) {
                 }
         }
     }
-    
