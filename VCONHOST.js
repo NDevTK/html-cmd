@@ -18,6 +18,7 @@ colors = new Map();
 hcount = 0;
 hdata = [];
 running = false;
+telnet_actions = /\[[A-z]/g;
 
 document.addEventListener('contextmenu', function(ev) {
     ev.preventDefault();
@@ -56,17 +57,9 @@ async function nslookup(domain) {
 
 const telnet_command = "[";
 
-function telnet_clean(text) {
-    while(text.includes(telnet_command)) {
-    text = text.slice(text.indexOf(telnet_command) + 1);
-    }
-    return text
-}
-
 function telnet_run(commands) {
-    commands.split(telnet_command).forEach((command, index) => {
-        if(index === 0) return
-        switch(command.substr(0,1)) {
+    commands.forEach((command, index) => {
+        switch(command) {
             case "H":
                 clear();
                 break;
@@ -83,9 +76,9 @@ function telnet(address) {
     };
     tShocket.onmessage = function(event) {
         if(event.data.includes(telnet_command)) {
-            telnet_run(event.data);
+            telnet_run(commands.matchAll(telnet_actions));
         }
-        let display = telnet_clean(event.data);
+        let display = event.data.replace(telnet_regex, "");
         EchoLine(display);
     };
 }
