@@ -76,7 +76,7 @@ function telnet(address) {
     };
     tShocket.onmessage = function(event) {
         if(event.data.includes(telnet_command)) {
-            telnet_run(commands.matchAll(telnet_actions));
+            telnet_run(event.data.matchAll(telnet_actions));
         }
         let display = event.data.replace(telnet_regex, "");
         EchoLine(display);
