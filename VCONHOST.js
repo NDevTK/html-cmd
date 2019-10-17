@@ -59,7 +59,7 @@ const telnet_command = "[";
 
 function telnet_run(actions) {
     Array.from(actions).forEach((command, index) => {
-        switch(command) {
+        switch(command.substr(2)) {
             case "H":
                 clear();
                 break;
