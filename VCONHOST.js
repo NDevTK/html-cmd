@@ -57,7 +57,7 @@ async function nslookup(domain) {
 const telnet_command = "[";
 
 function telnet_run(command) {
-    switch(event.data.split(telnet_command)[1])) {
+    switch(command.split(telnet_command)[1]) {
         case "H":
             clear();
             break;
@@ -72,7 +72,7 @@ function telnet(address) {
         tShocket.send(address);
     };
     tShocket.onmessage = function(event) {
-        if(event.data.startsWith(telnet_command) {
+        if(event.data.startsWith(telnet_command)) {
             return telnet_run(telnet_command);
         }
         EchoLine(event.data);
