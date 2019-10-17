@@ -1,3 +1,5 @@
 # html-cmd
 Pointless fake cmd in html,css,js   
-Demo at https://cmd.ndev.tk/
+Website: https://cmd.ndev.tk/
+nslookup and telnet work :D
+Try: telnet towel.blinkenlights.nl
