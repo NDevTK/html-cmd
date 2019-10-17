@@ -164,7 +164,7 @@ function OSK() {
 }
 
 function echo(line) {
-    return output.innerText += result;
+    return output.innerText += line;
 }
 
 function EchoLine(line) {
