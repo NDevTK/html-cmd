@@ -59,7 +59,7 @@ const telnet_command = "[";
 function telnet_run(commands) {
     commands.split(telnet_command).forEach((command, index) => {
         if(index === 0) return
-        switch(command.split(telnet_command)[1]) {
+        switch(command) {
             case "H":
                 clear();
                 break;
@@ -76,7 +76,7 @@ function telnet(address) {
     };
     tShocket.onmessage = function(event) {
         if(event.data.startsWith(telnet_command)) {
-            return telnet_run(telnet_command);
+            return telnet_run(event.data);
         }
         EchoLine(event.data);
     };
