@@ -54,6 +54,16 @@ async function nslookup(domain) {
     EchoLine(result);
 }
 
+const telnet_command = "[";
+
+function telnet_run(command) {
+    switch(event.data.split(telnet_command)[1]) {
+        case "H":
+            clear();
+            break;
+    }
+}
+
 function telnet(address) {
     tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
     clear();
@@ -62,7 +72,9 @@ function telnet(address) {
         tShocket.send(address);
     };
     tShocket.onmessage = function(event) {
-        if(event.data.includes("[H")) clear();
+        if(event.data.startsWith(telnet_command) {
+            return telnet_run(telnet_command);
+        }
         EchoLine(event.data);
     };
 }
