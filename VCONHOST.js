@@ -56,6 +56,13 @@ async function nslookup(domain) {
 
 const telnet_command = "[";
 
+function telnet_clean(text) {
+    while(text.includes(telnet_command)) {
+    text = text.slice(text.indexOf(telnet_command) + 1);
+    }
+    return text
+}
+
 function telnet_run(commands) {
     commands.split(telnet_command).forEach((command, index) => {
         if(index === 0) return
@@ -76,9 +83,10 @@ function telnet(address) {
     };
     tShocket.onmessage = function(event) {
         if(event.data.includes(telnet_command)) {
-            return telnet_run(event.data);
+            telnet_run(event.data);
         }
-        EchoLine(event.data);
+        let display = telnet_clean(event.data);
+        EchoLine(display);
     };
 }
 
