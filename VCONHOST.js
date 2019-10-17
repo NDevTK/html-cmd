@@ -146,7 +146,8 @@ function OSK() {
 }
 
 function echo(line) {
-    return output.innerText += line;
+    let result = line.replace(" ", " "); // Non-breaking space
+    return output.innerText += result;
 }
 
 function EchoLine(line) {
