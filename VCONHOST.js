@@ -57,7 +57,7 @@ async function nslookup(domain) {
 const telnet_command = "[";
 
 function telnet_run(command) {
-    switch(event.data.split(telnet_command)[1]) {
+    switch(event.data.split(telnet_command)[1])) {
         case "H":
             clear();
             break;
