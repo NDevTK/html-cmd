@@ -57,8 +57,8 @@ async function nslookup(domain) {
 
 const telnet_command = "[";
 
-function telnet_run(commands) {
-    commands.forEach((command, index) => {
+function telnet_run(actions) {
+    Array.from(actions).forEach((command, index) => {
         switch(command) {
             case "H":
                 clear();
@@ -78,7 +78,7 @@ function telnet(address) {
         if(event.data.includes(telnet_command)) {
             telnet_run(event.data.matchAll(telnet_actions));
         }
-        let display = event.data.replace(telnet_regex, "");
+        let display = event.data.replace(telnet_actions, "");
         EchoLine(display);
     };
 }
