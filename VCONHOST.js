@@ -29,6 +29,8 @@ document.addEventListener('contextmenu', function(ev) {
 function insert_clipboard() {
     navigator.clipboard.readText().then(text => {
         input.innerText += text;
+    }).catch(err => {
+        console.info('Clipboard access denied');
     });
 }
 
