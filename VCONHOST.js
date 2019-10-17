@@ -1,7 +1,7 @@
 async function Header(version = "10.0.18362.388", year = 2019) {
-    output.innerText =
-        `Microsoft Windows [Version ${version}]
-    (c) ${year} Microsoft Corporation. All rights reserved.`
+output.innerText =
+`Microsoft Windows [Version ${version}]
+(c) ${year} Microsoft Corporation. All rights reserved.`
 }
 
 async function HELPLookup(command) {
@@ -33,7 +33,8 @@ function insert_clipboard() {
 }
 
 function NSL(domain, ip) {
-    return `Server:  dns.google
+    return
+   `Server:  dns.google
     Address:  8.8.8.8
     
     Non-authoritative answer:
@@ -42,7 +43,8 @@ function NSL(domain, ip) {
 }
 
 function NSLFail(domain) {
-    return `Server:  dns.google
+    return 
+   `Server:  dns.google
     Address:  8.8.8.8
     
     *** dns.google can't find ${domain}: Non-existent domain`
@@ -162,7 +164,6 @@ function OSK() {
 }
 
 function echo(line) {
-    let result = line.replace(" ", " "); // Non-breaking space
     return output.innerText += result;
 }
 
