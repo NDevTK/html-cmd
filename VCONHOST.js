@@ -56,12 +56,15 @@ async function nslookup(domain) {
 
 const telnet_command = "[";
 
-function telnet_run(command) {
-    switch(command.split(telnet_command)[1]) {
-        case "H":
-            clear();
-            break;
-    }
+function telnet_run(commands) {
+    commands.split(telnet_command).forEach((command, index) => {
+        if(index === 0) return
+        switch(command.split(telnet_command)[1]) {
+            case "H":
+                clear();
+                break;
+        }
+    })
 }
 
 function telnet(address) {
