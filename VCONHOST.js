@@ -232,9 +232,11 @@ function clear() {
 
 close = null;
 async function setRunning(name = false) {
-    if(name === false && close !== null) {
-        close();
-        close = null;
+    if(name === false) {
+        if(close !== null) {
+            close();
+            close = null;
+        }
         EchoLine();
     }
     dir.hidden = (name);
