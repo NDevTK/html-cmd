@@ -180,18 +180,18 @@ function NewLine() {
     echo("\n");
 }
 
-async function Control(key) {
+function Control(key) {
     switch(key) {
         case "C":
             setRunning();
-            break;
+            return true;
     }
 }
 
 function ModifyInput(e) {
     if(e.ctrlKey) {
         let key = e.key.toUpperCase();
-        Control(key);
+        if(Control(key)) return
         return "^"+key;
     } else {
         return e.key;
