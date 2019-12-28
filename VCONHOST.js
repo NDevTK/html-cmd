@@ -174,8 +174,8 @@ function echo(line = "") {
 }
 
 function EchoLine(line = "") {
-    if(hdata.length > 0) return echo(line);
-    echo("\n" + line);
+    if(hdata.length > 0) return echo("\n"+line);
+    echo(line);
 }
 
 function NewLine() {
