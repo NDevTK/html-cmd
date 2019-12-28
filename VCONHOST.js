@@ -237,8 +237,8 @@ async function setRunning(name = false) {
             close();
             close = null;
         }
-        command.innerText = "";
         EchoLine(dir.innerText);
+        command.innerText = "";
     }
     dir.hidden = (name);
     running = name;
