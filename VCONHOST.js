@@ -175,10 +175,17 @@ function NewLine() {
     echo("\n");
 }
 
+ModifyInput(e) {
+    if(e.ctrlKey) {
+        return "^"+e.key.toUpperCase();
+    } else {
+        return e.key;
+    }
+}
+
 document.addEventListener('keydown', function(e) {
     if (e.key.length === 1) {
-        let prefix = (e.ctrlKey) ? "^" : "";
-        input.innerText += prefix + e.key;
+        input.innerText += ModifyInput(e);
         return
     }
     txt = command.innerText.trim();
