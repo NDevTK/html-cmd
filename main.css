@@ -10,3 +10,8 @@ body {
 ::selection {
   background: white;
 }
+
+pre {
+    display: inline;
+    margin: 0;
+}
