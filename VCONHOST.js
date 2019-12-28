@@ -209,7 +209,7 @@ document.addEventListener('keydown', function(e) {
     txt = command.innerText.trim();
     switch (e.code) {
         case "Enter":
-            if(input.innerText !== "") NewLine();
+            if(input.innerText !== "" && hdata.length > 0) NewLine();
             EchoLine(command.innerText);
             process(txt);
             hdata.push(input.innerText);
