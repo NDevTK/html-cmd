@@ -177,7 +177,8 @@ function NewLine() {
 
 document.addEventListener('keydown', function(e) {
     if (e.key.length === 1) {
-        input.innerText += e.key;
+        let prefix = (e.ctrlKey) ? "^" : "";
+        input.innerText += prefix + e.key;
         return
     }
     txt = command.innerText.trim();
