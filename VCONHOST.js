@@ -295,7 +295,7 @@ async function process(command) {
                 break;
             
             case "":
-                break;
+                return;
 
             case "title":
                 if (args.length > 1) {
@@ -311,4 +311,5 @@ async function process(command) {
                     EchoLine(commands.get(args[0]));
                 }
     }
+    NewLine();
 }
