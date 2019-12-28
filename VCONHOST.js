@@ -69,7 +69,12 @@ function telnet_run(actions) {
     })
 }
 
+function telnet_close(address) {
+    tShocket.close();
+}
+
 function telnet(address) {
+    close = telnet_close;
     tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
     clear();
     setRunning("telnet");
@@ -178,7 +183,7 @@ function NewLine() {
 async function Control(key) {
     switch(key) {
         case "C":
-            EchoLine();
+            setRunning();
             break;
     }
 }
@@ -225,7 +230,13 @@ function clear() {
     output.innerText = "";
 }
 
+close = null;
 async function setRunning(name = false) {
+    if(name === false && close !== null) {
+        close();
+        close = null;
+        EchoLine();
+    }
     dir.hidden = (name);
     running = name;
 }
