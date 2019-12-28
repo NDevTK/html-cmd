@@ -237,7 +237,7 @@ async function setRunning(name = false) {
             close();
             close = null;
         }
-        EchoLine();
+        EchoLine(dir.innerText);
     }
     dir.hidden = (name);
     running = name;
