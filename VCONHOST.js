@@ -208,6 +208,7 @@ document.addEventListener('keydown', function(e) {
     txt = command.innerText.trim();
     switch (e.code) {
         case "Enter":
+            NewLine();
             EchoLine(command.innerText);
             process(txt);
             hdata.push(input.innerText);
