@@ -5,10 +5,10 @@ output.innerText =
 }
 
 async function HELPLookup(command) {
-    end = (command) ? "RAW/" + command.toUpperCase() : "Summary";
-    resp = await fetch("https://cmddoc.ndev.tk/" + end);
+    let end = (command) ? "RAW/" + command.toUpperCase() : "Summary";
+    let resp = await fetch("https://cmddoc.ndev.tk/" + end);
     if (!resp.ok) return 'This command is not supported by the help utility.  Try "' + command + ' /?".'
-    text = await resp.text();
+    let text = await resp.text();
     return text;
 }
 
@@ -237,6 +237,7 @@ async function setRunning(name = false) {
             close();
             close = null;
         }
+        command.innerText = "";
         EchoLine(dir.innerText);
     }
     dir.hidden = (name);
