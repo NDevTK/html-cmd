@@ -191,7 +191,7 @@ function Control(key) {
 function ModifyInput(e) {
     if(e.ctrlKey) {
         let key = e.key.toUpperCase();
-        if(Control(key)) return
+        if(Control(key)) return null
         return "^"+key;
     } else {
         return e.key;
@@ -200,7 +200,9 @@ function ModifyInput(e) {
 
 document.addEventListener('keydown', function(e) {
     if (e.key.length === 1) {
-        input.innerText += ModifyInput(e);
+        let content = ModifyInput(e);
+        if(content === null) return
+        input.innerText += content;
         return
     }
     txt = command.innerText.trim();
