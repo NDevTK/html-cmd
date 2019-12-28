@@ -179,7 +179,7 @@ async function Control(key) {
     switch(key) {
         case "C":
             EchoLine();
-    
+            break;
     }
 }
 
