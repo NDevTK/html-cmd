@@ -163,11 +163,11 @@ function OSK() {
     }
 }
 
-function echo(line) {
+function echo(line = "") {
     return output.innerText += line;
 }
 
-function EchoLine(line) {
+function EchoLine(line = "") {
     echo("\n" + line);
 }
 
@@ -175,9 +175,19 @@ function NewLine() {
     echo("\n");
 }
 
-ModifyInput(e) {
+async function Control(key) {
+    switch(key) {
+        case "C":
+            EchoLine();
+    
+    }
+}
+
+function ModifyInput(e) {
     if(e.ctrlKey) {
-        return "^"+e.key.toUpperCase();
+        let key = e.key.toUpperCase();
+        Control(key);
+        return "^"+key;
     } else {
         return e.key;
     }
