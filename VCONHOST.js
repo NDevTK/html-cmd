@@ -335,7 +335,7 @@ async function process(command) {
                 await HELP(args[1])
                 break;
             case "cd":
-                if(args.length === 1) EchoLine(path)
+                if(args.length === 1) EchoLine(path.substring(0, path.length - 1));
                 break;
 
             case "":
