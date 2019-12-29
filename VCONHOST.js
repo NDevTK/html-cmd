@@ -278,14 +278,14 @@ async function process(command) {
             if (args.length > 1 && args.length < 4) {
                 telnet(args[1]);
             } else {
-                HELP("telnet");
+                await HELP("telnet");
             }
             break;
         case "nslookup":
             if (args.length > 1 && args.length < 3) {
                 await nslookup(args[1]);
             } else {
-                HELP("nslookup");
+                await HELP("nslookup");
             }
             break;
             case "echo":
@@ -300,7 +300,7 @@ async function process(command) {
                 break;
 
             case "help":
-                HELP(args[1])
+                await HELP(args[1])
                 break;
             
             case "":
