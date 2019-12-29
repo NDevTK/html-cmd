@@ -1,6 +1,3 @@
-MessageCallback = null;
-MessagePrefix = ""
-
 async function Header(version = "10.0.18363.535", year = 2019) {
 output.innerText =
 `Microsoft Windows [Version ${version}]
@@ -262,10 +259,6 @@ async function setRunning(name = false) {
 }
 
 async function process(command) {
-    // MessageCallback support
-    if(MessagePrefix !== "" && !command.startsWith(MessagePrefix) && MessageCallback !== null) return MessageCallback(command);
-    if(MessagePrefix !== "") command = command.substring(MessagePrefix.length);
-    // Check for running stuff
     if (running) {
         switch (running) {
             case "telnet":
