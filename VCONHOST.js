@@ -206,6 +206,10 @@ function ModifyInput(e) {
     }
 }
 
+function RemoveLB(message) {
+    return message.replace( /[\r\n]+/gm, "" );
+}
+
 document.addEventListener('keydown', function(e) {
     if (e.key.length === 1) {
         let content = ModifyInput(e);
@@ -213,7 +217,7 @@ document.addEventListener('keydown', function(e) {
         input.innerText += content;
         return
     }
-    txt = command.innerText.trim();
+    txt = RemoveLB(command.innerText);
     switch (e.code) {
         case "Enter":
             EchoLine(txt);
