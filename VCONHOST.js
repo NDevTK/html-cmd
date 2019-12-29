@@ -174,8 +174,7 @@ function echo(line = "") {
 }
 
 function EchoLine(line = "") {
-    if(hdata.length > 0) return echo("\n"+line);
-    echo(line);
+    echo("\n"+line);
 }
 
 function NewLine() {
@@ -210,8 +209,7 @@ document.addEventListener('keydown', function(e) {
     txt = command.innerText.trim();
     switch (e.code) {
         case "Enter":
-            if(input.innerText !== "" && hdata.length > 0) NewLine();
-            EchoLine(command.innerText);
+            EchoLine(txt);
             process(txt);
             hdata.push(input.innerText);
             input.innerText = "";
