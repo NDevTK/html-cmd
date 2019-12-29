@@ -174,7 +174,7 @@ function echo(line = "") {
 }
 
 function EchoLine(line = "") {
-    echo("\n"+line);
+    echo(line+"\n");
 }
 
 function NewLine() {
