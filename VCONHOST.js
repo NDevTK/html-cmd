@@ -56,6 +56,7 @@ async function nslookup(domain) {
     let json = await response.json();
     let result = (json.Status === 0) ? NSL(domain, json.Answer[0].data) : NSLFail(domain);
     EchoLine(result);
+    NewLine();
 }
 
 const telnet_command = "[";
