@@ -17,7 +17,7 @@ async function Ping(host) {
     let resp = await fetch("https://steakovercooked.com/api/ping/?host=" + encodeURI(host));
     if (!resp.ok) return 'API error :(';
     let text = await resp.json();
-    if(text === null) return "Ping request could not find host ${host}. Please check the name and try again.";
+    if(text === null) return "Ping request could not find host "+host+"Please check the name and try again.";
     return text;
 }
 
