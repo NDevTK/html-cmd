@@ -140,9 +140,16 @@ function LowerCase(array) {
 }
 
 function ColorParser(codes) {
+    if(codes.length === 1) {
+        document.body.style.color = "silver";
+        document.body.style.backgroundColor = "black";
+        return
+    }
     codes = LowerCase(codes);
     if (colors.has(codes[1])) {
         document.body.style.color = colors.get(codes[1]);
+    } else {
+       return HELP("color");
     }
     if (colors.has(colors[2])) {
         document.body.style.backgroundColor = colors.get(colors[2]);
