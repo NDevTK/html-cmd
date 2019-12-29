@@ -58,6 +58,16 @@ function NSLFail(domain) {
     *** dns.google can't find ${domain}: Non-existent domain`
 }
 
+// TODO: add local ip address detection
+function ipconfig(localip = "192.168.1.5", subnet = "255.255.255.0", gateway = "192.168.1.1") {
+    return `Wireless LAN adapter WiFi:
+
+   Connection-specific DNS Suffix  . : lan
+   IPv4 Address. . . . . . . . . . . : ${localip}
+   Subnet Mask . . . . . . . . . . . : ${subnet}
+   Default Gateway . . . . . . . . . : ${gateway}`
+}
+
 async function nslookup(domain) {
     let response = await fetch('https://dns.google/resolve?name='.concat(encodeURI(domain)));
     let json = await response.json();
@@ -296,6 +306,11 @@ async function process(command) {
                 await HELP("nslookup");
             }
             break;
+            
+            case "ipconfig": 
+                EchoLine(ipconfig());
+                break;
+            
             case "echo":
                 if (args.length > 1) {
                     EchoLine(displayable);
