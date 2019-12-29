@@ -319,7 +319,10 @@ async function process(command) {
             case "help":
                 await HELP(args[1])
                 break;
-            
+            case "cd":
+                if(args.length === 1) EchoLine(path)
+                break;
+
             case "":
                 return;
 
