@@ -13,6 +13,13 @@ async function HELPLookup(command) {
     return text;
 }
 
+async function Ping(host) {
+    let resp = await fetch("https://steakovercooked.com/api/ping/?host=" + host);
+    if (!resp.ok) return 'Ping error'
+    let text = await resp.json();
+    return text;
+}
+
 help = new Map();
 commands = new Map();
 colors = new Map();
@@ -299,7 +306,16 @@ async function process(command) {
             case "color":
                 ColorParser(args);
                 break;
-
+            
+            case "ping":
+                if (args.length > 1) {
+                    let result = await Ping(args[1]);
+                    EchoLine(result);
+                } else {
+                    await HELP("ping");
+                }
+                break;
+            
             case "help":
                 await HELP(args[1])
                 break;
