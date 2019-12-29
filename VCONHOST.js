@@ -161,7 +161,7 @@ function getDisplayable(args, silce) {
 }
 async function HELP(command) {
     reply = await HELPLookup(command);
-    EchoLine(reply);
+    echo(reply);
     return;
 }
 
