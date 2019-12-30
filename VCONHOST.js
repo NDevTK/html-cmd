@@ -8,7 +8,7 @@ output.innerText =
 async function HELPLookup(command) {
     let end = (command) ? "RAW/" + command.toUpperCase() : "Summary";
     let resp = await fetch("https://cmddoc.ndev.tk/" + end);
-    if (!resp.ok) return 'This command is not supported by the help utility.  Try "' + command + ' /?".'
+    if (!resp.ok) return 'This command is not supported by the help utility.  Try "' + command + ' /?".\n'
     let text = await resp.text();
     return text;
 }
