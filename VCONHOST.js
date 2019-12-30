@@ -113,7 +113,7 @@ function ipconfig(localip = "192.168.1.5", subnet = "255.255.255.0", gateway = "
     return `Wireless LAN adapter WiFi:
 
    Connection-specific DNS Suffix  . : lan
-   IPv4 Address. . . . . . . . . . . : ${localip}
+   IPv6 Address. . . . . . . . . . . : ${localip}
    Subnet Mask . . . . . . . . . . . : ${subnet}
    Default Gateway . . . . . . . . . : ${gateway}`
 }
