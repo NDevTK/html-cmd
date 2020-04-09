@@ -1,4 +1,4 @@
-async function Header(version = "10.0.18363.720", year = 2019) {
+async function Header(version = "10.0.18363.752", year = 2019) {
 output.innerText =
 `Microsoft Windows [Version ${version}]
 (c) ${year} Microsoft Corporation. All rights reserved.
