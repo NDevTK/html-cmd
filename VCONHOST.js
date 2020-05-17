@@ -5,6 +5,12 @@ output.innerText =
 
 `}
 
+function getType() {
+    if(navigator.connection === undefined) return false;
+    let type = (navigator.connection.type === undefined) ? navigator.connection.type : navigator.connection.effectiveType;
+    return (type === "ethernet") ? "Ethernet" : "Wireless";
+}
+
 async function HELPLookup(command) {
     let end = (command) ? "RAW/" + command.toUpperCase() : "Summary";
     let resp = await fetch("https://cmddoc.ndev.tk/" + end);
@@ -110,7 +116,7 @@ if (RTCPeerConnection) (function () {
 }
 
 function ipconfig(localip = "192.168.1.5", subnet = "255.255.255.0", gateway = "192.168.1.1") {
-    return `Wireless LAN adapter WiFi:
+    return getType() + ` LAN adapter WiFi:
 
    Connection-specific DNS Suffix  . : lan
    IPv6 Address. . . . . . . . . . . : ${localip}
