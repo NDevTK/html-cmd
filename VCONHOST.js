@@ -1,4 +1,4 @@
-async function Header(version = "10.0.18363.752", year = 2019) {
+async function Header(version = "10.0.18363.836", year = 2019) {
 output.innerText =
 `Microsoft Windows [Version ${version}]
 (c) ${year} Microsoft Corporation. All rights reserved.
@@ -249,11 +249,12 @@ function echo(line = "") {
 }
 
 function EchoLine(line = "") {
-    echo(line+"\n");
+    echo(line + NewLine());
 }
 
 function NewLine() {
     echo("\n");
+    window.scrollTo(0, document.body.scrollHeight);
 }
 
 function Control(key) {
