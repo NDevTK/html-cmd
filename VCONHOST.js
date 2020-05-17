@@ -51,18 +51,18 @@ function insert_clipboard() {
 
 function NSL(domain, ip) {
     return `Server:  dns.google
-    Address:  8.8.8.8
+Address:  8.8.8.8
     
-    Non-authoritative answer:
-    Name:    ${domain}
-    Addresses:  ${ip}`
+Non-authoritative answer:
+Name:    ${domain}
+Addresses:  ${ip}`
 }
 
 function NSLFail(domain) {
     return `Server:  dns.google
-    Address:  8.8.8.8
-    
-    *** dns.google can't find ${domain}: Non-existent domain`
+Address:  8.8.8.8
+
+*** dns.google can't find ${domain}: Non-existent domain`
 }
 
 function getLocal() {
