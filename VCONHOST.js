@@ -245,16 +245,16 @@ function OSK() {
 }
 
 function echo(line = "") {
-    return output.innerText += line;
+    output.innerText += line;
+    window.scrollTo(0, document.body.scrollHeight);   
 }
 
 function EchoLine(line = "") {
-    echo(line + NewLine());
+    echo(line+"\n");
 }
 
 function NewLine() {
     echo("\n");
-    window.scrollTo(0, document.body.scrollHeight);
 }
 
 function Control(key) {
