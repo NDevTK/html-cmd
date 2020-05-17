@@ -29,8 +29,8 @@ hdata = [];
 running = false;
 telnet_actions = /\[[A-z]/g;
 
-document.addEventListener('contextmenu', function(ev) {
-    ev.preventDefault();
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
     insert_clipboard();
     return false;
 }, false);
@@ -300,9 +300,11 @@ document.addEventListener('keydown', function(e) {
             input.innerText += " ";
             break;
         case "ArrowDown":
+            e.preventDefault();
             history(true);
             break;
         case "ArrowUp":
+            e.preventDefault();
             history(false);
             break;
     }
