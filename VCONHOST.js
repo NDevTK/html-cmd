@@ -6,7 +6,7 @@ output.innerText =
 `}
 
 function getType() {
-    if(navigator.connection === undefined) return false;
+    if(navigator.connection === undefined) return "Wireless";
     let type = (navigator.connection.type === undefined) ? navigator.connection.type : navigator.connection.effectiveType;
     return (type === "ethernet") ? "Ethernet" : "Wireless";
 }
