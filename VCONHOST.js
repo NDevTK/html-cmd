@@ -38,6 +38,9 @@ var environment = new Map()
 .set("USERPROFILE", "C:\\Users\\NDevTK")
 .set("windir", "C:\\Windows");
 
+internel = new Map()
+.set("RANDOM", random);
+
 async function Header(version = "10.0.18363.836", year = 2019) {
 output.innerText =
 `Microsoft Windows [Version ${version}]
@@ -368,15 +371,12 @@ function getEnv(name) {
         return environment.get(name);
     }
     let key = name.toUpperCase();
-    switch (key) {
-        case "RANDOM":
-            return random(0, 32767);
-    }
     // Failback to case insensitive check
     for (value of environment) {
         if (value[0].toUpperCase() === key) return value[1];
     }
 }
+
 async function setRunning(name = false) {
     if(name === false) {
         if(close !== null) {
@@ -390,7 +390,7 @@ async function setRunning(name = false) {
     running = name;
 }
 
-function random(min, max) {
+function random(min = 0, max = "32767") {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -410,6 +410,9 @@ async function process(command) {
     path = tmp[0]; // C:\WINDOWS\system32
     userinput = input.innerText;
     for (value of environment) userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]);
+    for (value of internel) {
+        userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]());
+    }
     args = userinput.split(" "); // echo,hello,world
     displayable = getDisplayable(args, 1);
     switch (args[0].toLowerCase()) {
