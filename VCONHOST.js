@@ -419,9 +419,9 @@ async function process(command) {
             if (args.length > 1) {
                 if (args[1].includes("=")) {
                 let data = args[1].split("=");
-                enviroment.set(data[0], data[1]);
-                } else if (enviroment.has(args[1])) {
-                    EchoLine(enviroment.has(args[1]));
+                environment.set(data[0], data[1]);
+                } else if (environment.has(args[1])) {
+                    EchoLine(environment.has(args[1]));
                 } else {
                     EchoLine("Environment variable "+displayable+" not defined")
                 }
