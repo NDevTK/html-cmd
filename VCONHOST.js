@@ -409,7 +409,7 @@ async function process(command) {
             break;
         case "set":
             if (args.length > 1) {
-                if (args[1].contains("=")) {
+                if (args[1].includes("=")) {
                 let data = args[1].split("=");
                 enviroment.set(data[0], data[1]);
                 } else if (enviroment.has(args[1])) {
