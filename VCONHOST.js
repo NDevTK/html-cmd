@@ -388,7 +388,7 @@ async function process(command) {
     args = input.innerText.split(" "); // echo,hello,world
     args.map(arg => {
         if (arg.startsWith("%") && arg.endsWith("%")) {
-            let name = arg.slice(1, -1);
+            let name = arg.slice(1, -1).toUpperCase();
             if (environment.has(name)) {
                 return environment.get(name);
             }
