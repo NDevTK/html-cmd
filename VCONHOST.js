@@ -1,3 +1,43 @@
+var environment = new Map()
+.set("ALLUSERSPROFILE", "C:\\ProgramData")
+.set("APPDATA", "C:\\Users\\NDevTK\\AppData\\Roaming")
+.set("CLIENTNAME", "ndev.tk")
+.set("CommonProgramFiles", "C:\\Program Files\\Common Files")
+.set("CommonProgramFiles(x86)", "C:\\Program Files (x86)\\Common Files")
+.set("CommonProgramW6432", "C:\\Program Files\\Common Files")
+.set("COMPUTERNAME", "ndev.tk")
+.set("ComSpec", "C:\\Windows\\system32\\cmd.exe")
+.set("DriverData", "C:\\Windows\\System32\\Drivers\\DriverData")
+.set("HOMEDRIVE", "C:")
+.set("HOMEPATH", "\\Users\\NDevTK")
+.set("LOCALAPPDATA", "C:\\Users\\NDevTK\\AppData\\Local")
+.set("LOGONSERVER", "\\\\ndev.tk")
+.set("NUMBER_OF_PROCESSORS", "1337")
+.set("OS", "Windows_NT")
+.set("Path","C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Users\\NDevTK\\AppData\\Local\\Microsoft\\WindowsApps;")
+.set("PATHEXT", ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL")
+.set("PROCESSOR_ARCHITECTURE", "AMD64")
+.set("PROCESSOR_IDENTIFIER", "NDevTK CPU, GenuineIntel")
+.set("PROCESSOR_LEVEL", "1337")
+.set("PROCESSOR_REVISION", "1337")
+.set("ProgramData", "C:\\ProgramData")
+.set("ProgramFiles", "C:\\Program Files")
+.set("ProgramFiles(x86)", "C:\\Program Files (x86)")
+.set("ProgramW6432", "C:\\Program Files")
+.set("PROMPT", "$P$G")
+.set("PSModulePath", "C:\\Users\\NDevTK\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules")
+.set("PUBLIC", "C:\\Users\\Public")
+.set("SESSIONNAME", "ndev.tk")
+.set("SystemDrive", "C:")
+.set("SystemRoot", "C:\\Windows")
+.set("TEMP", "C:\\Users\\NDevTK\\AppData\\Local\\Temp")
+.set("TMP", "C:\\Users\\NDevTK\\AppData\\Local\\Temp")
+.set("USERDOMAIN", "ndev.tk")
+.set("USERDOMAIN_ROAMINGPROFILE", "ndev.tk")
+.set("USERNAME", "NDevTK")
+.set("USERPROFILE", "C:\\Users\\NDevTK")
+.set("windir", "C:\\Windows");
+
 async function Header(version = "10.0.18363.836", year = 2019) {
 output.innerText =
 `Microsoft Windows [Version ${version}]
@@ -345,7 +385,16 @@ async function process(command) {
     }
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
-    args = input.innerText.split(" "); // echo,hello,world 
+    args = input.innerText.split(" "); // echo,hello,world
+    args.map(arg => {
+        if (arg.startsWith("%") && arg.endsWith("%")) {
+            let name = arg.slice(1, -1);
+            if (environment.has(name)) {
+                return environment.get(name);
+            }
+        }
+        return arg
+    });
     displayable = getDisplayable(args, 1);
     switch (args[0].toLowerCase()) {
         case "cls":
