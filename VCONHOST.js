@@ -375,6 +375,10 @@ async function setRunning(name = false) {
     running = name;
 }
 
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 async function process(command) {
     if (running) {
         switch (running) {
@@ -389,6 +393,10 @@ async function process(command) {
     args = args.map(arg => {
         if (arg.startsWith("%") && arg.endsWith("%")) {
             let name = arg.slice(1, -1).toUpperCase();
+            switch (name) {
+                case "RANDOM":
+                    return random(0, 32767);
+            }
             if (environment.has(name)) {
                 return environment.get(name);
             }
