@@ -386,7 +386,7 @@ async function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
     args = input.innerText.split(" "); // echo,hello,world
-    args.map(arg => {
+    args = args.map(arg => {
         if (arg.startsWith("%") && arg.endsWith("%")) {
             let name = arg.slice(1, -1).toUpperCase();
             if (environment.has(name)) {
