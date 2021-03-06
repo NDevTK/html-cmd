@@ -409,9 +409,9 @@ async function process(command) {
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
     userinput = input.innerText;
-    for (value of environment) userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]);
+    for (value of environment) userinput = userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]);
     for (value of internel) {
-        userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]());
+        userinput = userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]());
     }
     args = userinput.split(" "); // echo,hello,world
     displayable = getDisplayable(args, 1);
@@ -475,7 +475,7 @@ async function process(command) {
                 break;
             
             case "help":
-                await HELP(args[1])
+                await HELP(args[1]);
                 break;
             case "cd":
                 if(args.length === 1) EchoLine(path.substring(0, path.length - 1));
