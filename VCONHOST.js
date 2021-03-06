@@ -392,13 +392,18 @@ async function process(command) {
     args = input.innerText.split(" "); // echo,hello,world
     args = args.map(arg => {
         if (arg.startsWith("%") && arg.endsWith("%")) {
-            let name = arg.slice(1, -1).toUpperCase();
-            switch (name) {
+            let name = arg.slice(1, -1);
+            if (environment.has(name)) {
+                return environment.get(name);
+            }
+            let key = name.toUpperCase();
+            switch (key) {
                 case "RANDOM":
                     return random(0, 32767);
             }
-            if (environment.has(name)) {
-                return environment.get(name);
+            // Failback to case insensitive check
+            for (value of environment) {
+                if(value[0].toUpperCase() === key) return name
             }
         }
         return arg
