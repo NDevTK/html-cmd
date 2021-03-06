@@ -407,6 +407,20 @@ async function process(command) {
                 await HELP("telnet");
             }
             break;
+        case "set":
+            if (args.length > 1) {
+                if (args[1].contains("=")) {
+                let data = args[1].split("=");
+                enviroment.set(data[0], data[1]);
+                } else if (enviroment.has(args[1])) {
+                    EchoLine(enviroment.has(args[1]));
+                } else {
+                    EchoLine("Environment variable "+displayable+" not defined")
+                }
+            } else {
+                for (value of environment) EchoLine(value[0] + "=" + value[1]);
+            }
+            break;
         case "nslookup":
             if (args.length > 1 && args.length < 3) {
                 await nslookup(args[1]);
