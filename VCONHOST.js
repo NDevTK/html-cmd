@@ -362,6 +362,21 @@ function clear() {
 }
 
 close = null;
+
+function getEnv(name) {
+    if (environment.has(name)) {
+        return environment.get(name);
+    }
+    let key = name.toUpperCase();
+    switch (key) {
+        case "RANDOM":
+            return random(0, 32767);
+    }
+    // Failback to case insensitive check
+    for (value of environment) {
+        if (value[0].toUpperCase() === key) return value[1];
+    }
+}
 async function setRunning(name = false) {
     if(name === false) {
         if(close !== null) {
@@ -379,6 +394,10 @@ function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
 async function process(command) {
     if (running) {
         switch (running) {
@@ -389,25 +408,9 @@ async function process(command) {
     }
     tmp = command.split(/>(.*)/);
     path = tmp[0]; // C:\WINDOWS\system32
-    args = input.innerText.split(" "); // echo,hello,world
-    args = args.map(arg => {
-        if (arg.startsWith("%") && arg.endsWith("%")) {
-            let name = arg.slice(1, -1);
-            if (environment.has(name)) {
-                return environment.get(name);
-            }
-            let key = name.toUpperCase();
-            switch (key) {
-                case "RANDOM":
-                    return random(0, 32767);
-            }
-            // Failback to case insensitive check
-            for (value of environment) {
-                if(value[0].toUpperCase() === key) return name
-            }
-        }
-        return arg
-    });
+    userinput = input.innerText;
+    for (value of environment) userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]);
+    args = userinput.split(" "); // echo,hello,world
     displayable = getDisplayable(args, 1);
     switch (args[0].toLowerCase()) {
         case "cls":
@@ -425,8 +428,9 @@ async function process(command) {
                 if (args[1].includes("=")) {
                 let data = args[1].split("=");
                 environment.set(data[0], data[1]);
-                } else if (environment.has(args[1])) {
-                    EchoLine(environment.has(args[1]));
+                let value = getEnv(args[1]);
+                } else if (value !== undefined) {
+                    EchoLine(value);
                 } else {
                     EchoLine("Environment variable "+displayable+" not defined")
                 }
