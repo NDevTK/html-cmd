@@ -72,7 +72,7 @@ function HIGHESTNUMANODENUMBER() {
 }
 
 function CMDCMDLINE() {
-    return '"C:\WINDOWS\system32\cmd.exe"'
+    return '"C:\WINDOWS\system32\cmd.exe"';
 }
 
 function CMDEXTVERSION() {
