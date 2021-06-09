@@ -1,3 +1,4 @@
+var errorCode = 0;
 var environment = new Map()
 .set("ALLUSERSPROFILE", "C:\\ProgramData")
 .set("APPDATA", "C:\\Users\\NDevTK\\AppData\\Roaming")
@@ -39,7 +40,48 @@ var environment = new Map()
 .set("windir", "C:\\Windows");
 
 internel = new Map()
-.set("RANDOM", random);
+.set("RANDOM", random)
+.set("%__APPDIR__%", appdir)
+.set("%__CD__%", current)
+.set("%CD%", current2)
+.set("%=C:%", current2)
+.set("FIRMWARE_TYPE", firmware_type)
+.set("HIGHESTNUMANODENUMBER", HIGHESTNUMANODENUMBER)
+.set("CMDCMDLINE", CMDCMDLINE)
+.set("CMDEXTVERSION", CMDEXTVERSION)
+.set("ERRORLEVEL" ERRORLEVEL)
+
+function firmware_type() {
+    return "UEFI";
+}
+
+function current() {
+    return dir.currentText;
+}
+
+function current2() {
+    return dir.currentText.slice(0, -1);
+}
+
+function appdir() {
+    return "C:\WINDOWS\system32\";
+}
+
+function HIGHESTNUMANODENUMBER() {
+    return "0";
+}
+
+function CMDCMDLINE() {
+    return '"C:\WINDOWS\system32\cmd.exe"'
+}
+
+function CMDEXTVERSION() {
+    return "2";
+}
+
+function ERRORLEVEL() {
+    return errorCode;
+}
 
 async function Header(version = "10.0.19042.985") {
 output.innerText =
