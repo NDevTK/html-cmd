@@ -41,10 +41,10 @@ var environment = new Map()
 internel = new Map()
 .set("RANDOM", random);
 
-async function Header(version = "10.0.18363.836", year = 2019) {
+async function Header(version = "10.0.19042.985") {
 output.innerText =
 `Microsoft Windows [Version ${version}]
-(c) ${year} Microsoft Corporation. All rights reserved.
+(c) Microsoft Corporation. All rights reserved.
 
 `}
 
