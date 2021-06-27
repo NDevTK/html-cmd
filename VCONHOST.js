@@ -64,7 +64,7 @@ function current2() {
 }
 
 function appdir() {
-    return "C:\WINDOWS\system32\";
+    return "C:\WINDOWS\system32\\";
 }
 
 function HIGHESTNUMANODENUMBER() {
