@@ -56,11 +56,11 @@ function firmware_type() {
 }
 
 function current() {
-    return dir.currentText;
+    return dir.innerText;
 }
 
 function current2() {
-    return dir.currentText.slice(0, -1);
+    return current().slice(0, -1);
 }
 
 function appdir() {
