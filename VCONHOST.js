@@ -64,7 +64,7 @@ function current2() {
 }
 
 function appdir() {
-    return "C:\WINDOWS\system32\\";
+    return "C:\\WINDOWS\\system32\\";
 }
 
 function HIGHESTNUMANODENUMBER() {
@@ -72,7 +72,7 @@ function HIGHESTNUMANODENUMBER() {
 }
 
 function CMDCMDLINE() {
-    return '"C:\WINDOWS\system32\cmd.exe"';
+    return '"C:\\WINDOWS\\system32\\cmd.exe"';
 }
 
 function CMDEXTVERSION() {
