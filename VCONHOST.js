@@ -382,7 +382,7 @@ document.addEventListener('keydown', function(e) {
         case "Enter":
             EchoLine(txt);
             process(txt);
-            if (hdata[hdata.length - 1] !== input.innerText) hdata.push(input.innerText);
+            if (input.innerText.length > 0 && hdata[hdata.length - 1] !== input.innerText) hdata.push(input.innerText);
             input.innerText = "";
             break;
         case "Backspace":
