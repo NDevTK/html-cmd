@@ -1,3 +1,5 @@
+"use strict";
+
 var errorCode = 0;
 var environment = new Map()
 .set("ALLUSERSPROFILE", "C:\\ProgramData")
@@ -83,7 +85,7 @@ function ERRORLEVEL() {
     return errorCode;
 }
 
-async function Header(version = "10.0.19042.985") {
+async function Header(version = "10.0.19043.1526") {
 output.innerText =
 `Microsoft Windows [Version ${version}]
 (c) Microsoft Corporation. All rights reserved.
@@ -293,26 +295,29 @@ colors.set('0', 'Black')
 
 function LowerCase(array) {
     for (var i = 0; i < array.length; i++) {
-        array[i] = array[i].toLowerCase()
+        array[i] = array[i]
     }
     return array
 }
 
-function ColorParser(codes) {
-    if(codes.length === 1) {
+function ColorParser(input) { 
+    if(input.length === 1) {
         document.body.style.color = "silver";
         document.body.style.backgroundColor = "black";
         return
     }
-    codes = LowerCase(codes);
-    if (colors.has(codes[1])) {
-        document.body.style.color = colors.get(codes[1]);
-    } else {
-       return HELP("color");
+    
+    let codes = LowerCase(input[1].split(""));
+    
+    if (codes.length === 1 && colors.has(codes[0])) {
+        document.body.style.color = colors.get(codes[0]);
     }
-    if (colors.has(colors[2])) {
-        document.body.style.backgroundColor = colors.get(colors[2]);
+    
+    if (codes.length === 2 && colors.has(codes[0]) && colors.has(colors[1])) {
+        document.body.style.color = colors.get(codes[0]);
+        document.body.style.backgroundColor = colors.get(colors[1]);
     }
+    HELP("color");
 }
 
 function getDisplayable(args, silce) {
