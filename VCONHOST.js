@@ -41,7 +41,7 @@ var environment = new Map()
 .set("USERPROFILE", "C:\\Users\\NDevTK")
 .set("windir", "C:\\Windows");
 
-internel = new Map()
+var internel = new Map()
 .set("RANDOM", random)
 .set("%__APPDIR__%", appdir)
 .set("%__CD__%", current)
@@ -114,13 +114,13 @@ async function Ping(host) {
     return text;
 }
 
-help = new Map();
-commands = new Map();
-colors = new Map();
-hcount = 0;
-hdata = [];
-running = false;
-telnet_actions = /\[[A-z]/g;
+var help = new Map();
+var commands = new Map();
+var colors = new Map();
+var hcount = 0;
+var hdata = [];
+var running = false;
+var telnet_actions = /\[[A-z]/g;
 
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
