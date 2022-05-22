@@ -330,15 +330,6 @@ async function HELP(command) {
 }
 
 Header();
-if (IsTouch) {
-    input.isContentEditable = true;
-}
-
-function OSK() {
-    if (IsTouch) {
-        input.focus();
-    }
-}
 
 function echo(line = "") {
     output.innerText += line;
