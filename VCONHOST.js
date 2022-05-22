@@ -402,7 +402,7 @@ function clear() {
     output.innerText = "";
 }
 
-close = null;
+let close = null;
 
 function getEnv(name) {
     if (environment.has(name)) {
@@ -444,15 +444,15 @@ async function process(command) {
                 break;
         }
     }
-    tmp = command.split(/>(.*)/);
-    path = tmp[0]; // C:\WINDOWS\system32
-    userinput = input.innerText;
+    let tmp = command.split(/>(.*)/);
+    let path = tmp[0]; // C:\WINDOWS\system32
+    let userinput = input.innerText;
     for (value of environment) userinput = userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]);
     for (value of internel) {
         userinput = userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]());
     }
-    args = userinput.split(" "); // echo,hello,world
-    displayable = getDisplayable(args, 1);
+    let args = userinput.split(" "); // echo,hello,world
+    let displayable = getDisplayable(args, 1);
     switch (args[0].toLowerCase()) {
         case "cls":
             clear();
