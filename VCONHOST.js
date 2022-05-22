@@ -373,9 +373,9 @@ document.addEventListener('keydown', function(e) {
         input.innerText += content;
         return
     }
-    txt = RemoveLB(command.innerText);
     switch (e.code) {
         case "Enter":
+            let txt = RemoveLB(command.innerText);
             EchoLine(txt);
             process(txt);
             if (input.innerText.length > 0 && hdata[hdata.length - 1] !== input.innerText) hdata.push(input.innerText);
