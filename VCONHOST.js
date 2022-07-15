@@ -324,7 +324,7 @@ function getDisplayable(args, silce) {
     return args.slice(silce).join(" ");
 }
 async function HELP(command) {
-    reply = await HELPLookup(command);
+    const reply = await HELPLookup(command);
     echo(reply);
     return;
 }
@@ -410,14 +410,14 @@ function getEnv(name) {
     }
     let key = name.toUpperCase();
     // Failback to case insensitive check
-    for (value of environment) {
+    for (const value of environment) {
         if (value[0].toUpperCase() === key) return value[1];
     }
 }
 
 async function setRunning(name = false) {
-    if(name === false) {
-        if(close !== null) {
+    if (name === false) {
+        if (close !== null) {
             close();
             close = null;
         }
@@ -447,8 +447,8 @@ async function process(command) {
     let tmp = command.split(/>(.*)/);
     let path = tmp[0]; // C:\WINDOWS\system32
     let userinput = input.innerText;
-    for (value of environment) userinput = userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]);
-    for (value of internel) {
+    for (const value of environment) userinput = userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]);
+    for (const value of internel) {
         userinput = userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]());
     }
     let args = userinput.split(" "); // echo,hello,world
@@ -476,7 +476,7 @@ async function process(command) {
                     EchoLine("Environment variable "+displayable+" not defined")
                 }
             } else {
-                for (value of environment) EchoLine(value[0] + "=" + value[1]);
+                for (const value of environment) EchoLine(value[0] + "=" + value[1]);
             }
             break;
         case "nslookup":
