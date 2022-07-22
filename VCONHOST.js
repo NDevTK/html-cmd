@@ -307,15 +307,17 @@ function ColorParser(input) {
         return
     }
     
-    let codes = LowerCase(input[1].split(""));
+    const codes = LowerCase(input[1].split(""));
     
     if (codes.length === 1 && colors.has(codes[0])) {
         document.body.style.color = colors.get(codes[0]);
+        return
     }
     
-    if (codes.length === 2 && colors.has(codes[0]) && colors.has(colors[1])) {
+    if (codes.length === 2 && colors.has(codes[0]) && colors.has(codes[1])) {
         document.body.style.color = colors.get(codes[0]);
-        document.body.style.backgroundColor = colors.get(colors[1]);
+        document.body.style.backgroundColor = colors.get(codes[1]);
+        return
     }
     HELP("color");
 }
