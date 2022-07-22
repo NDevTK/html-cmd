@@ -349,10 +349,16 @@ function LowerCase(array) {
     return array
 }
 
+function resetColors() {
+    document.body.style.color = getRGB("0");
+    document.body.style.backgroundColor = getRGB("7");
+}
+
+resetColors();
+
 function ColorParser(input) { 
     if(input.length === 1) {
-        document.body.style.color = "silver";
-        document.body.style.backgroundColor = "black";
+        resetColors();
         return
     }
     
@@ -364,7 +370,11 @@ function ColorParser(input) {
     }
     
     if (codes.length === 2 && colors.has(codes[0]) && colors.has(codes[1])) {
-        if (codes[0] === codes[1]) return
+        // The COLOR command sets ERRORLEVEL to 1 if an attempt is made to execute the COLOR command with a foreground and background color that are the same.
+        if (codes[0] === codes[1]) {
+            errorCode = 1;
+            return
+        }
         document.body.style.backgroundColor = getRGB(codes[0]);
         document.body.style.color = getRGB(codes[1]);
         return
