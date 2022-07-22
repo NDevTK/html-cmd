@@ -93,6 +93,13 @@ output.innerText =
 
 `}
 
+function OSK() {
+    if ('virtualKeyboard' in navigator) {
+        navigator.virtualKeyboard.overlaysContent = true;
+        navigator.virtualKeyboard.show();
+    }
+}
+
 function getType() {
     if(navigator.connection === undefined) return "Wireless";
     let type = (navigator.connection.type === undefined) ? navigator.connection.type : navigator.connection.effectiveType;
