@@ -467,6 +467,7 @@ function clear() {
 }
 
 let close = null;
+let tShocket = null;
 
 function getEnv(name) {
     if (environment.has(name)) {
