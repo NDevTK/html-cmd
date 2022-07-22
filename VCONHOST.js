@@ -366,6 +366,7 @@ function ColorParser(input) {
     
     if (codes.length === 1 && colors.has(codes[0])) {
         document.body.style.color = getRGB(codes[0]);
+        errorCode = 0;
         return
     }
     
@@ -377,6 +378,7 @@ function ColorParser(input) {
         }
         document.body.style.backgroundColor = getRGB(codes[0]);
         document.body.style.color = getRGB(codes[1]);
+        errorCode = 0;
         return
     }
     HELP("color");
