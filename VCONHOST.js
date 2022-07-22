@@ -1,5 +1,6 @@
 "use strict";
 
+var legacyColor = true;
 var errorCode = 0;
 var environment = new Map()
 .set("ALLUSERSPROFILE", "C:\\ProgramData")
@@ -276,22 +277,70 @@ function history(down) {
     }
 
 }
-colors.set('0', 'Black')
-    .set('1', 'Blue')
-    .set('2', 'Green')
-    .set('3', 'Aqua')
-    .set('4', 'Red')
-    .set('5', 'Purple')
-    .set('6', 'Yellow')
-    .set('7', 'White')
-    .set('8', 'Gray')
-    .set('9', 'LightBlue')
-    .set('a', 'Green')
-    .set('b', 'Aqua')
-    .set('c', 'LightRed')
-    .set('d', 'LightPurple')
-    .set('e', 'LightYellow')
-    .set('f', 'White')
+
+// Hex codes from https://devblogs.microsoft.com/commandline/updating-the-windows-console-colors/
+var legacyHEX = new Map()
+.set('BLACK', 'rgb(0,0,0)')
+.set('DARK_BLUE','rgb(0,0,128)')
+.set('DARK_GREEN','rgb(0,128,0)')
+.set('DARK_CYAN','rgb(0,128,128)')
+.set('DARK_RED','rgb(128,0,0)')
+.set('DARK_MAGENTA','rgb(128,0,128)')
+.set('DARK_YELLOW','rgb(128,128,0)')
+.set('DARK_WHITE','rgb(192,192,192)')
+.set('BRIGHT_BLACK','rgb(128,128,128)')
+.set('BRIGHT_BLUE','rgb(0,0,255)')
+.set('BRIGHT_GREEN','rgb(0,255,0)')
+.set('BRIGHT_CYAN','rgb(0,255,255)')
+.set('BRIGHT_RED','rgb(255,0,0)')
+.set('BRIGHT_MAGENTA','rgb(255,0,255)')
+.set('BRIGHT_YELLOW','rgb(255,255,0)')
+.set('WHITE','rgb(255,255,255)')
+
+var newHEX = new Map()
+.set('BLACK', 'rgb(12,12,12)')
+.set('DARK_BLUE','rgb(0,55,218)')
+.set('DARK_GREEN','rgb(19,161,14)')
+.set('DARK_CYAN','rgb(58,150,221)')
+.set('DARK_RED','rgb(197,15,31)')
+.set('DARK_MAGENTA','rgb(136,23,152)')
+.set('DARK_YELLOW','rgb(193,156,0)')
+.set('DARK_WHITE','rgb(204,204,204)')
+.set('BRIGHT_BLACK','rgb(118,118,118)')
+.set('BRIGHT_BLUE','rgb(59,120,255)')
+.set('BRIGHT_GREEN','rgb(22,198,12)')
+.set('BRIGHT_CYAN','rgb(97,214,214)')
+.set('BRIGHT_RED','rgb(231,72,86)')
+.set('BRIGHT_MAGENTA','rgb(180,0,158)')
+.set('BRIGHT_YELLOW','rgb(249,241,165)')
+.set('WHITE','rgb(242,242,242)')
+
+// Mapping provided by https://ss64.com/nt/syntax-ansi.html
+colors.set('0', 'BLACK')
+    .set('1', 'DARK_BLUE')
+    .set('2', 'DARK_GREEN')
+    .set('3', 'DARK_CYAN')
+    .set('4', 'DARK_RED')
+    .set('5', 'DARK_MAGENTA')
+    .set('6', 'DARK_YELLOW')
+    .set('7', 'DARK_WHITE')
+    .set('8', 'BRIGHT_BLACK')
+    .set('9', 'BRIGHT_BLUE')
+    .set('a', 'BRIGHT_GREEN')
+    .set('b', 'BRIGHT_CYAN')
+    .set('c', 'BRIGHT_RED')
+    .set('d', 'BRIGHT_MAGENTA')
+    .set('e', 'BRIGHT_YELLOW')
+    .set('f', 'WHITE')
+
+function getRGB(code) {
+    const ID = colors.get(code);
+    if (legacyColor) {
+        return legacyHEX.get(ID);
+    } else {
+        return newHEX.get(ID);
+    }
+}
 
 function LowerCase(array) {
     for (var i = 0; i < array.length; i++) {
@@ -310,14 +359,14 @@ function ColorParser(input) {
     const codes = LowerCase(input[1].split(""));
     
     if (codes.length === 1 && colors.has(codes[0])) {
-        document.body.style.color = colors.get(codes[0]);
+        document.body.style.color = getRGB(codes[0]);
         return
     }
     
     if (codes.length === 2 && colors.has(codes[0]) && colors.has(codes[1])) {
         if (codes[0] === codes[1]) return
-        document.body.style.backgroundColor = colors.get(codes[0]);
-        document.body.style.color = colors.get(codes[1]);
+        document.body.style.backgroundColor = getRGB(codes[0]);
+        document.body.style.color = getRGB(codes[1]);
         return
     }
     HELP("color");
