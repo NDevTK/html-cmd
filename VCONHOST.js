@@ -350,8 +350,8 @@ function LowerCase(array) {
 }
 
 function resetColors() {
-    document.body.style.color = getRGB("0");
-    document.body.style.backgroundColor = getRGB("7");
+    document.body.style.color = getRGB("7");
+    document.body.style.backgroundColor = getRGB("0");
 }
 
 resetColors();
