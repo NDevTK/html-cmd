@@ -316,8 +316,8 @@ function ColorParser(input) {
     
     if (codes.length === 2 && colors.has(codes[0]) && colors.has(codes[1])) {
         if (codes[0] === codes[1]) return
-        document.body.style.color = colors.get(codes[0]);
-        document.body.style.backgroundColor = colors.get(codes[1]);
+        document.body.style.backgroundColor = colors.get(codes[0]);
+        document.body.style.color = colors.get(codes[1]);
         return
     }
     HELP("color");
