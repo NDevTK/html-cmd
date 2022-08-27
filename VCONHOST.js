@@ -245,7 +245,7 @@ function telnet_close(address) {
 
 function telnet(address) {
     close = telnet_close;
-    tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
+    //tShocket = new WebSocket("wss://telnetproxy.herokuapp.com");
     clear();
     setRunning("telnet");
     tShocket.onopen = function() {
