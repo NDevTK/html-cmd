@@ -622,7 +622,7 @@ async function process(command) {
                     EchoLine('Type "WHOAMI /?" for usage.');
                     return
                 };
-                EchoLine(environment.get("COMPUTERNAME") + "\" + environment.get("USERNAME"));
+                EchoLine(getEnv("COMPUTERNAME") + "\\" + getEnv("USERNAME"));
                 break;
             default:
                 if (!commands.has(args[0])) {
