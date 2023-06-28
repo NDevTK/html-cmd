@@ -109,7 +109,7 @@ function getType() {
 async function HELPLookup(command) {
     let end = (command) ? "RAW/" + command.toUpperCase() : "Summary";
     let resp = await fetch("https://cmddoc.ndev.tk/" + end);
-    if (!resp.ok) return 'This command is not supported by the help utility.  Try "' + command + ' /?".\n'
+    if (!resp.ok) return false;
     let text = await resp.text();
     return text;
 }
@@ -394,10 +394,20 @@ function ColorParser(input) {
 function getDisplayable(args, silce) {
     return args.slice(silce).join(" ");
 }
-async function HELP(command) {
+async function HELP(command, showError = true) {
     const reply = await HELPLookup(command);
-    echo(reply);
-    return;
+
+    if (showError && reply === false) {
+        EchoLine('This command is not supported by the help utility.  Try "' + command + ' /?".');
+        return false;
+    }
+    
+    if (reply !== false) {
+        EchoLine(reply);
+        return true;
+    }
+    
+    return false;
 }
 
 Header();
@@ -525,6 +535,11 @@ async function process(command) {
     }
     let args = userinput.split(" "); // echo,hello,world
     let displayable = getDisplayable(args, 1);
+
+    if (displayable.endsWith(" /?")) {
+        if (HELP(args[0], false)) return;
+    }
+    
     switch (args[0].toLowerCase()) {
         case "cls":
             clear();
@@ -600,6 +615,14 @@ async function process(command) {
                 }
                 break;
             case "cd":
+                break;
+            case "whoami":
+                if (args.length > 1) {
+                    EchoLine("ERROR: Invalid argument/option - '" + args[1] + "'.");
+                    EchoLine('Type "WHOAMI /?" for usage.');
+                    return
+                };
+                EchoLine(environment.get("COMPUTERNAME") + "\" + environment.get("USERNAME"));
                 break;
             default:
                 if (!commands.has(args[0])) {
