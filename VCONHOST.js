@@ -538,7 +538,7 @@ async function process(command) {
 
     if (args.length > 1 && userinput.endsWith(" /?")) {
         // Supports stuff like title /? but should not provide help if invalid command.
-        if (HELP(args[0], false)) return;
+        if (await HELP(args[0], false)) return;
     }
     
     switch (args[0].toLowerCase()) {
