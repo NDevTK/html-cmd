@@ -577,7 +577,7 @@ async function process(command) {
             }
             break;
         case "nslookup":
-            if (args.length > 1 && args.length < 3) {
+            if (args.length > 1 && args.length < 3 && !userinput.endsWith(" /?")) {
                 await nslookup(args[1]);
                 break;
             }
