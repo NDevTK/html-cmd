@@ -536,7 +536,8 @@ async function process(command) {
     let args = userinput.split(" "); // echo,hello,world
     let displayable = getDisplayable(args, 1);
 
-    if (displayable.endsWith(" /?")) {
+    if (args.length > 1 && userinput.endsWith(" /?")) {
+        // Supports stuff like title /? but should not provide help if invalid command.
         if (HELP(args[0], false)) return;
     }
     
