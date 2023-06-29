@@ -579,8 +579,19 @@ async function process(command) {
         case "nslookup":
             if (args.length > 1 && args.length < 3) {
                 await nslookup(args[1]);
-            } else {
-                await HELP("nslookup");
+                break;
+            }
+            if (args.length > 1 && userinput.endsWith(" /?")) {
+                EchoLine(`Usage:
+   nslookup [-opt ...]             # interactive mode using default server
+   nslookup [-opt ...] - server    # interactive mode using 'server'
+   nslookup [-opt ...] host        # just look up 'host' using default server
+   nslookup [-opt ...] host server # just look up 'host' using 'server'`);
+                break;
+            }
+            if (args.length === 1) {
+               EchoLine("Please use nslookup <domain>") ;
+                break;
             }
             break;
             
