@@ -153,6 +153,15 @@ Name:    ${domain}
 Addresses:  ${ip}`
 }
 
+function net() {
+    return `The syntax of this command is:
+
+NET
+    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |
+      HELPMSG | LOCALGROUP | PAUSE | SESSION | SHARE | START |
+      STATISTICS | STOP | TIME | USE | USER | VIEW ]`;
+}
+
 function NSLFail(domain) {
     return `Server:  dns.google
 Address:  8.8.8.8
@@ -624,6 +633,15 @@ async function process(command) {
                     return
                 };
                 EchoLine(getEnv("COMPUTERNAME") + "\\" + getEnv("USERNAME"));
+                break;
+            case "net":
+                EchoLine(net());
+                break;
+            case "calc":
+                location = "calculator://";
+                break;
+            case "calc.exe":
+                location = "calculator://";
                 break;
             default:
                 if (!commands.has(args[0])) {
