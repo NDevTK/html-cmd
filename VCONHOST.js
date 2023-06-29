@@ -643,11 +643,12 @@ async function process(command) {
                     let protocol = new URL(toOpen).protocol;
                     if (protocol === "https:" || protocol === "http:") {
                         open(toOpen);
-                        break
+                        break;
                     }
                 } catch {}
                 if (args.length > 1 && (args[1].toLowerCase() === 'calc' || args[1].toLowerCase() === 'calc.exe')) {
                     location = "calculator://";
+                    break;
                 }
                 EchoLine("The system cannot find the file "+ args[1] +".");
                 break;
