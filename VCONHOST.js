@@ -630,12 +630,23 @@ async function process(command) {
                 if (args.length > 1) {
                     EchoLine("ERROR: Invalid argument/option - '" + args[1] + "'.");
                     EchoLine('Type "WHOAMI /?" for usage.');
-                    return
+                    break
                 };
                 EchoLine(getEnv("COMPUTERNAME") + "\\" + getEnv("USERNAME"));
                 break;
             case "net":
                 EchoLine(net());
+                break;
+            case "start":
+                let toOpen = (args.length > 1) ? args[1] : location.href;
+                try {
+                    let protocol = new URL(toOpen).protocol;
+                    if (protocol === "https:" || protocol === "http:") {
+                        open(toOpen);
+                        break
+                    }
+                } catch {}
+                EchoLine("The system cannot find the file "+ args[1] +".");
                 break;
             case "calc":
                 location = "calculator://";
