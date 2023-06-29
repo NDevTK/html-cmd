@@ -646,6 +646,9 @@ async function process(command) {
                         break
                     }
                 } catch {}
+                if (args.length > 1 && (args[1].toLowerCase() === 'calc' || args[1].toLowerCase() === 'calc.exe')) {
+                    location = "calculator://";
+                }
                 EchoLine("The system cannot find the file "+ args[1] +".");
                 break;
             case "calc":
