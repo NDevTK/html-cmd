@@ -2,9 +2,9 @@
 
 var legacyColor = true;
 var errorCode = 0;
-var environment = new Map()
 var version = "10.0.19043.1526";
 
+var environment = new Map()
 .set("ALLUSERSPROFILE", "C:\\ProgramData")
 .set("APPDATA", "C:\\Users\\NDevTK\\AppData\\Roaming")
 .set("CLIENTNAME", "ndev.tk")
