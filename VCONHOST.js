@@ -91,7 +91,6 @@ function ERRORLEVEL() {
 async function Header(showCopyright = true) {
     EchoLine(`Microsoft Windows [Version ${version}]`);
     if (showCopyright) EchoLine("(c) Microsoft Corporation. All rights reserved.");
-    NewLine();
 }
 
 function OSK() {
