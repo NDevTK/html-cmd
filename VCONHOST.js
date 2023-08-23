@@ -671,6 +671,13 @@ async function process(command) {
                 location = "calculator://";
                 break;
             case "ver":
+                NewLine();
+                Header(false);
+                break;
+            case "cmd":
+                Header(false);
+                break;
+            case "cmd.exe":
                 Header(false);
                 break;
             default:
