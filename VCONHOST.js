@@ -3,6 +3,8 @@
 var legacyColor = true;
 var errorCode = 0;
 var environment = new Map()
+var version = "10.0.19043.1526";
+
 .set("ALLUSERSPROFILE", "C:\\ProgramData")
 .set("APPDATA", "C:\\Users\\NDevTK\\AppData\\Roaming")
 .set("CLIENTNAME", "ndev.tk")
@@ -86,12 +88,11 @@ function ERRORLEVEL() {
     return errorCode;
 }
 
-async function Header(version = "10.0.19043.1526") {
-output.innerText =
-`Microsoft Windows [Version ${version}]
-(c) Microsoft Corporation. All rights reserved.
-
-`}
+async function Header(showCopyright = true) {
+    EchoLine(`Microsoft Windows [Version ${version}]`);
+    if (showCopyright) EchoLine("(c) Microsoft Corporation. All rights reserved.");
+    NewLine();
+}
 
 function OSK() {
     if ('virtualKeyboard' in navigator) {
@@ -669,6 +670,8 @@ async function process(command) {
             case "calc.exe":
                 location = "calculator://";
                 break;
+            case "ver":
+                Header(false);
             default:
                 if (!commands.has(args[0])) {
                     EchoLine("'" + args[0] + "' is not recognized as an internal or external command,\noperable program or batch file.");
