@@ -672,6 +672,7 @@ async function process(command) {
                 break;
             case "ver":
                 Header(false);
+                break;
             default:
                 if (!commands.has(args[0])) {
                     EchoLine("'" + args[0] + "' is not recognized as an internal or external command,\noperable program or batch file.");
