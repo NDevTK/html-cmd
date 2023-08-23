@@ -675,10 +675,10 @@ async function process(command) {
                 Header(false);
                 break;
             case "cmd":
-                Header(false);
+                Header();
                 break;
             case "cmd.exe":
-                Header(false);
+                Header();
                 break;
             default:
                 if (!commands.has(args[0])) {
