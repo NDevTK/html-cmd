@@ -97,8 +97,15 @@ async function Header(showCopyright = true) {
 function OSK() {
     if ('virtualKeyboard' in navigator) {
         navigator.virtualKeyboard.overlaysContent = true;
+        alert('OSK time?');
+        try {
         navigator.virtualKeyboard.show();
+        } catch (e) {
+            alert('Ah theres an OSK error: ' e);
+        }
+        alert('Lets hope you got an OSK now and it not just ignore you like it normaly does :)');
     }
+    alert('You did run OSK so that good!');
 }
 
 function getType() {
