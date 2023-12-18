@@ -420,6 +420,7 @@ async function HELP(command, showError = true) {
 }
 
 Header();
+NewLine();
 
 function echo(line = "") {
     output.innerText += line;
