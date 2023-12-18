@@ -101,7 +101,7 @@ function OSK() {
         try {
         navigator.virtualKeyboard.show();
         } catch (e) {
-            alert('Ah theres an OSK error: ' e);
+            alert('Ah theres an OSK error: ' + e);
         }
         alert('Lets hope you got an OSK now and it not just ignore you like it normaly does :)');
     }
