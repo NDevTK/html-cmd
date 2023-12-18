@@ -18,7 +18,7 @@ var environment = new Map()
 .set("HOMEPATH", "\\Users\\NDevTK")
 .set("LOCALAPPDATA", "C:\\Users\\NDevTK\\AppData\\Local")
 .set("LOGONSERVER", "\\\\ndev.tk")
-// Not prefect
+// Not perfect
 .set("NUMBER_OF_PROCESSORS", navigator.hardwareConcurrency || 4)
 .set("OS", "Windows_NT")
 .set("Path","C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Users\\NDevTK\\AppData\\Local\\Microsoft\\WindowsApps;")
@@ -100,6 +100,8 @@ function OSK() {
         navigator.virtualKeyboard.show();
     }
 }
+
+window.addEventListener('touchstart', OSK);
 
 function getType() {
     if(navigator.connection === undefined) return "Wireless";
