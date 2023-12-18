@@ -101,8 +101,6 @@ function OSK() {
     }
 }
 
-window.addEventListener('touchstart', OSK);
-
 function getType() {
     if(navigator.connection === undefined) return "Wireless";
     let type = (navigator.connection.type === undefined) ? navigator.connection.type : navigator.connection.effectiveType;
