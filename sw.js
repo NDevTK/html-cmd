@@ -5,7 +5,7 @@ self.addEventListener('fetch', function (event) {
 
 function inject(response) {
 const headers = new Headers(response.headers);
-headers.set('Content-Security-Policy', 'sandbox allow-scripts allow-popups allow-popups-to-escape-sandbox');
+headers.set('Content-Security-Policy', 'sandbox allow-scripts allow-popups allow-modals allow-popups-to-escape-sandbox');
 headers.set('X-Frame-Options', 'SAMEORIGIN');
 headers.set('Cross-Origin-Opener-Policy', 'same-origin');
 headers.set('Strict-Transport-Security', 'max-age=31536000');
