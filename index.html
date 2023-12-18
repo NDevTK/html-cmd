@@ -11,9 +11,11 @@
 
 <body>
     <pre id="output"></pre>
-    <div id="command" ontouchend="OSK()">
+    <div id="command" ontouchstart="OSK()">
         <label id="dir">C:\WINDOWS\system32\&gt;</label>
+        <div id="oskArea">
         <a style="white-space:pre" id="input"></a>
+        </div>
     </div>
     <script>
 if (window.origin !== "null") {
