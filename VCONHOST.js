@@ -4,6 +4,17 @@ var legacyColor = true;
 var errorCode = 0;
 var version = "10.0.19043.1526";
 
+var oskMode = false;
+
+function OSK() {
+    if ('virtualKeyboard' in navigator) {
+        navigator.virtualKeyboard.overlaysContent = true;
+        input.contentEditable = true;
+        oskMode = true;
+        navigator.virtualKeyboard.show();
+    }
+}
+
 var environment = new Map()
 .set("ALLUSERSPROFILE", "C:\\ProgramData")
 .set("APPDATA", "C:\\Users\\NDevTK\\AppData\\Roaming")
@@ -452,7 +463,7 @@ function RemoveLB(message) {
 }
 
 document.addEventListener('keydown', function(e) {
-    if (e.key.length === 1) {
+    if (e.key.length === 1 && !oskMode) {
         let content = ModifyInput(e);
         if(content === null) return
         input.innerText += content;
@@ -467,9 +478,11 @@ document.addEventListener('keydown', function(e) {
             input.innerText = "";
             break;
         case "Backspace":
+            if (oskMode) break;
             input.innerText = input.innerText.slice(0, -1);
             break;
         case "Space":
+            if (oskMode) break;
             input.innerText += " ";
             break;
         case "ArrowDown":
