@@ -10,6 +10,7 @@ function OSK() {
     if ('virtualKeyboard' in navigator) {
         navigator.virtualKeyboard.overlaysContent = true;
         input.contentEditable = true;
+        input.focus();
         oskMode = true;
         navigator.virtualKeyboard.show();
     }
