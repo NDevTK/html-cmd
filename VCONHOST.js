@@ -431,8 +431,11 @@ async function HELP(command, showError = true) {
     return false;
 }
 
-Header();
-NewLine();
+if (window.name !== 'cmd.exe-pipe') {
+    Header();
+    NewLine();
+}
+
 
 function echo(line = "") {
     output.innerText += line;
@@ -676,10 +679,13 @@ async function process(userinput = input.innerText, showCommand = true) {
                     break;
                 }
                 if (args.length > 1 && (args[1].toLowerCase() === 'cmd' || args[1].toLowerCase() === 'cmd.exe')) {
-                    let newCmd = open(location.href, "cmd.exe", "popup");
                     if (args.length > 3 && args[2].toLowerCase() === '/k') {
-                        setTimeout(() => { newCmd.postMessage(getDisplayable(args, 3)) }, 100);
-                    }  
+                        let newCmd = open(location.href, "cmd.exe-pipe", "popup");
+                        setTimeout(() => { newCmd.postMessage(getDisplayable(args, 3)) }, 100); 
+                    } else {
+                        open(location.href, "cmd.exe", "popup");
+                    }
+                        
                     break;
                 }
                 EchoLine("The system cannot find the file "+ args[1] +".");
