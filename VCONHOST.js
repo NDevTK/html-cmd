@@ -541,7 +541,7 @@ function escapeRegExp(string) {
 }
 
 async function process(userinput = input.innerText, showCommand = true) {
-    let command = RemoveLB(command.innerText);
+    let command = RemoveLB(document.getElementById('command').innerText);
     if (showCommand) EchoLine(command);
     if (running) {
         switch (running) {
