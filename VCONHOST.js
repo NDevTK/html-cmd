@@ -6,13 +6,6 @@ var version = "10.0.19043.1526";
 
 var oskMode = false;
 
-onmessage = (event) => {
-    if (event.origin !== location.origin || event.source !== window.opener) return
-    window.name = "cmd.exe";
-    // When a user runs "start cmd.exe /k echo :)" it should be piped to the popup.
-    process(event.data, false);
-}
-
 function OSK() {
     if ('virtualKeyboard' in navigator) {
         navigator.virtualKeyboard.overlaysContent = true;
@@ -683,11 +676,13 @@ async function process(userinput = input.innerText, showCommand = true) {
                 if (args.length > 1 && (args[1].toLowerCase() === 'cmd' || args[1].toLowerCase() === 'cmd.exe')) {
                     if (args.length > 3 && args[2].toLowerCase() === '/k') {
                         let newCmd = open(location.href, "cmd.exe-pipe", "popup");
-                        setTimeout(() => { newCmd.postMessage(getDisplayable(args, 3)) }, 100); 
+                        setTimeout(() => {
+                            newCmd.name = "";
+                            newCmd.process(getDisplayable(args, 3), false);
+                        }, 100);
                     } else {
-                        open(location.href, "cmd.exe", "popup");
+                        open(location.href, "", "popup");
                     }
-                        
                     break;
                 }
                 EchoLine("The system cannot find the file "+ args[1] +".");
