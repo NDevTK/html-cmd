@@ -683,10 +683,10 @@ async function process(userinput = input.innerText, showCommand = true) {
                 }
                 if (args.length > 1 && (args[1].toLowerCase() === 'cmd' || args[1].toLowerCase() === 'cmd.exe')) {
                     if (args.length > 3 && args[2].toLowerCase() === '/k') {
-                        let newCmd = open(location.href, "cmd.exe-pipe", "popup");
+                        let newCmd = open(location.href, "cmd.exe-pipe", "noopener,popup");
                         setTimeout(() => { newCmd.postMessage(getDisplayable(args, 3)) }, 100); 
                     } else {
-                        open(location.href, "cmd.exe", "popup");
+                        open(location.href, "cmd.exe", "noopener,popup");
                     }
                         
                     break;
