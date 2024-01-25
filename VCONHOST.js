@@ -8,6 +8,7 @@ var oskMode = false;
 
 onmessage = (event) => {
     if (event.origin !== location.origin || event.source !== window.opener) return
+    window.name = "cmd.exe";
     // When a user runs "start cmd.exe /k echo :)" it should be piped to the popup.
     process(event.data, false);
 }
@@ -434,8 +435,6 @@ async function HELP(command, showError = true) {
 if (window.name !== 'cmd.exe-pipe') {
     Header();
     NewLine();
-} else {
-    window.name = 'cmd.exe';
 }
 
 
