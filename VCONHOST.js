@@ -670,11 +670,13 @@ async function process(command) {
                     location = "calculator://";
                     break;
                 }
+                if (args.length > 1 && (args[1].toLowerCase() === 'cmd' || args[1].toLowerCase() === 'cmd.exe')) {
+                    open(location.href, "cmd.exe", "popup");
+                    break;
+                }
                 EchoLine("The system cannot find the file "+ args[1] +".");
                 break;
             case "calc":
-                location = "calculator://";
-                break;
             case "calc.exe":
                 location = "calculator://";
                 break;
@@ -683,8 +685,6 @@ async function process(command) {
                 Header(false);
                 break;
             case "cmd":
-                Header();
-                break;
             case "cmd.exe":
                 Header();
                 break;
