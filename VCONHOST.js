@@ -695,7 +695,7 @@ async function process(userinput = input.innerText, showCommand = true) {
             case "cmd":
             case "cmd.exe":
                 if (args.length > 2 && args[1].toLowerCase() === '/k') {
-                    window.postMessage(getDisplayable(args, 2));
+                    process(getDisplayable(args, 2), false);
                     break;
                 }  
                 Header();
