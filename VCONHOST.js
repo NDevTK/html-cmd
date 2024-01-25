@@ -434,7 +434,10 @@ async function HELP(command, showError = true) {
 if (window.name !== 'cmd.exe-pipe') {
     Header();
     NewLine();
+} else {
+    window.name = 'cmd.exe';
 }
+
 
 
 function echo(line = "") {
