@@ -678,7 +678,7 @@ async function process(userinput = input.innerText, showCommand = true) {
                 if (args.length > 1 && (args[1].toLowerCase() === 'cmd' || args[1].toLowerCase() === 'cmd.exe')) {
                     let newCmd = open(location.href, "cmd.exe", "popup");
                     if (args.length > 3 && args[2].toLowerCase() === '/k') {
-                        newCmd.postMessage(args[3]);
+                        setTimeout(() => { newCmd.postMessage(getDisplayable(args, 3)) }, 10);
                     }  
                     break;
                 }
@@ -695,7 +695,7 @@ async function process(userinput = input.innerText, showCommand = true) {
             case "cmd":
             case "cmd.exe":
                 if (args.length > 3 && args[2].toLowerCase() === '/k') {
-                    window.postMessage(args[3]);
+                    setTimeout(() => { window.postMessage(getDisplayable(args, 3)) }, 10);
                     break;
                 }  
                 Header();
