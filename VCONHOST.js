@@ -539,6 +539,13 @@ function escapeRegExp(string) {
 }
 
 async function process(userinput = input.innerText, showCommand = true) {
+    let commands = userinput.split('&');
+    let userinput = commands[0];
+    for (let [index, val] of commands.entries()) {
+        if (index === 0 || val === "") continue;
+        process(val);
+    }
+
     let command = RemoveLB(document.getElementById('command').innerText);
     if (showCommand) EchoLine(command);
     if (running) {
