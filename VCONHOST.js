@@ -673,7 +673,7 @@ async function process(userinput = input.innerText, showCommand = true) {
                 try {
                     let protocol = new URL(toOpen).protocol;
                     if (protocol === "https:" || protocol === "http:") {
-                        open(toOpen);
+                        open(toOpen, "_blank", "noopener,noreferrer");
                         break;
                     }
                 } catch {}
@@ -683,10 +683,10 @@ async function process(userinput = input.innerText, showCommand = true) {
                 }
                 if (args.length > 1 && (args[1].toLowerCase() === 'cmd' || args[1].toLowerCase() === 'cmd.exe')) {
                     if (args.length > 3 && args[2].toLowerCase() === '/k') {
-                        let newCmd = open(location.href, "cmd.exe-pipe", "noopener,popup");
+                        let newCmd = open(location.href, "cmd.exe-pipe", "popup");
                         setTimeout(() => { newCmd.postMessage(getDisplayable(args, 3)) }, 100); 
                     } else {
-                        open(location.href, "cmd.exe", "noopener,popup");
+                        open(location.href, "cmd.exe", "popup");
                     }
                         
                     break;
