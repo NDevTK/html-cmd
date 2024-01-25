@@ -6,6 +6,12 @@ var version = "10.0.19043.1526";
 
 var oskMode = false;
 
+onmessage = (event) => {
+    if (event.origin !== location.origin || event.source !== window.opener) return
+    // When a user runs "start cmd.exe /k echo :)" it should be piped to the popup.
+    process(event.data, false);
+}
+
 function OSK() {
     if ('virtualKeyboard' in navigator) {
         navigator.virtualKeyboard.overlaysContent = true;
@@ -472,9 +478,7 @@ document.addEventListener('keydown', function(e) {
     }
     switch (e.code) {
         case "Enter":
-            let txt = RemoveLB(command.innerText);
-            EchoLine(txt);
-            process(txt);
+            process();
             if (input.innerText.length > 0 && hdata[hdata.length - 1] !== input.innerText) hdata.push(input.innerText);
             input.innerText = "";
             break;
@@ -536,7 +540,9 @@ function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
 
-async function process(command) {
+async function process(userinput = input.innerText, showCommand = true) {
+    let command = RemoveLB(command.innerText);
+    if (showCommand) EchoLine(command);
     if (running) {
         switch (running) {
             case "telnet":
@@ -546,7 +552,6 @@ async function process(command) {
     }
     let tmp = command.split(/>(.*)/);
     let path = tmp[0]; // C:\WINDOWS\system32
-    let userinput = input.innerText;
     for (const value of environment) userinput = userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]);
     for (const value of internel) {
         userinput = userinput.replace(new RegExp(escapeRegExp("%"+value[0]+"%"), 'gi'), value[1]());
@@ -671,7 +676,10 @@ async function process(command) {
                     break;
                 }
                 if (args.length > 1 && (args[1].toLowerCase() === 'cmd' || args[1].toLowerCase() === 'cmd.exe')) {
-                    open(location.href, "cmd.exe", "popup");
+                    let newCmd = open(location.href, "cmd.exe", "popup");
+                    if (args.length > 3 && args[2].toLowerCase() === '/k') {
+                        newCmd.postMessage(args[3]);
+                    }  
                     break;
                 }
                 EchoLine("The system cannot find the file "+ args[1] +".");
