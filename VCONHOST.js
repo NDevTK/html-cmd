@@ -543,7 +543,7 @@ async function process(userinput = input.innerText, showCommand = true) {
     let userinput = commands[0];
     for (let [index, val] of commands.entries()) {
         if (index === 0 || val === "") continue;
-        process(val);
+        process(val, false);
     }
 
     let command = RemoveLB(document.getElementById('command').innerText);
