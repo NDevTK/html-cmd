@@ -113,7 +113,7 @@ function getType() {
 }
 
 async function HELPLookup(command) {
-    let end = (command) ? "RAW/" + encodeURI(command.toUpperCase()) : "Summary";
+    let end = (command) ? "RAW/" + encodeURIComponent(command.toUpperCase()) : "Summary";
     let resp = await fetch("https://cmddoc.ndev.tk/" + end);
     if (!resp.ok) return false;
     let text = await resp.text();
