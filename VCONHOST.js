@@ -107,13 +107,13 @@ async function Header(showCopyright = true) {
 }
 
 function getType() {
-    if(navigator.connection === undefined) return "Wireless";
-    let type = (navigator.connection.type === undefined) ? navigator.connection.type : navigator.connection.effectiveType;
+    if (navigator.connection === undefined) return "Wireless";
+    let type = (navigator.connection.type === undefined) ? navigator.connection.effectiveType : navigator.connection.type;
     return (type === "ethernet") ? "Ethernet" : "Wireless LAN";
 }
 
 async function HELPLookup(command) {
-    let end = (command) ? "RAW/" + command.toUpperCase() : "Summary";
+    let end = (command) ? "RAW/" + encodeURI(command.toUpperCase()) : "Summary";
     let resp = await fetch("https://cmddoc.ndev.tk/" + end);
     if (!resp.ok) return false;
     let text = await resp.text();
@@ -121,7 +121,7 @@ async function HELPLookup(command) {
 }
 
 async function Ping(host) {
-    let resp = await fetch("https://steakovercooked.com/api/ping/?host=" + encodeURI(host));
+    let resp = await fetch("https://steakovercooked.com/api/ping/?host=" + encodeURIComponent(host));
     if (!resp.ok) return 'API error :(';
     let text = await resp.json();
     if(text === null) return "Ping request could not find host "+host+" Please check the name and try again.";
