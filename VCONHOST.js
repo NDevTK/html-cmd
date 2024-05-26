@@ -648,7 +648,7 @@ async function process(userinput = input.innerText, showCommand = true) {
 
             case "":
                 return;
-
+            case "title.exe":
             case "title":
                 if (args.length > 1) {
                     document.title = displayable
@@ -656,6 +656,7 @@ async function process(userinput = input.innerText, showCommand = true) {
                 break;
             case "cd":
                 break;
+            case "whoami.exe":
             case "whoami":
                 if (args.length > 1) {
                     EchoLine("ERROR: Invalid argument/option - '" + args[1] + "'.");
@@ -664,6 +665,7 @@ async function process(userinput = input.innerText, showCommand = true) {
                 };
                 EchoLine(getEnv("COMPUTERNAME") + "\\" + getEnv("USERNAME"));
                 break;
+            case "net.exe":
             case "net":
                 EchoLine(net());
                 break;
@@ -699,6 +701,7 @@ async function process(userinput = input.innerText, showCommand = true) {
                 location = "calculator://";
                 break;
             case "ver":
+            case "ver.exe":
                 NewLine();
                 Header(false);
                 break;
@@ -710,6 +713,9 @@ async function process(userinput = input.innerText, showCommand = true) {
                 }  
                 Header();
                 break;
+            case: "exit":
+            case: "exit.exe":
+                close();
             default:
                 if (!commands.has(args[0])) {
                     EchoLine("'" + args[0] + "' is not recognized as an internal or external command,\noperable program or batch file.");
