@@ -713,8 +713,8 @@ async function process(userinput = input.innerText, showCommand = true) {
                 }  
                 Header();
                 break;
-            case: "exit":
-            case: "exit.exe":
+            case "exit":
+            case "exit.exe":
                 close();
             default:
                 if (!commands.has(args[0])) {
