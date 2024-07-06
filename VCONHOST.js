@@ -539,9 +539,9 @@ function escapeRegExp(string) {
 }
 
 async function process(userinput = input.innerText, showCommand = true) {
-    let commands = userinput.split('&');
-    userinput = commands[0].trim();
-    for (let [index, val] of commands.entries()) {
+    const args = userinput.split('&');
+    userinput = args[0].trim();
+    for (let [index, val] of args.entries()) {
         if (index === 0 || val === "") continue;
         process(val, false);
     }
