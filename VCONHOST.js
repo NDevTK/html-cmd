@@ -539,6 +539,10 @@ function escapeRegExp(string) {
 }
 
 async function process(userinput = input.innerText, showCommand = true) {
+    if (window.top !== window) {
+        EchoLine('To prevent clickjacking commands are disabled when embedded.');
+        return
+    }
     const userinput_args = userinput.split('&');
     userinput = userinput_args[0].trim();
     for (let [index, val] of userinput_args.entries()) {
