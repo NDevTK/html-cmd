@@ -2,7 +2,7 @@
 
 var legacyColor = true;
 var errorCode = 0;
-var version = "10.0.19043.1526";
+var version = "10.0.26100.3775";
 
 var oskMode = false;
 
