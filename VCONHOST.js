@@ -9,7 +9,7 @@ var oskMode = false;
 function OSK() {
     if ('virtualKeyboard' in navigator) {
         navigator.virtualKeyboard.overlaysContent = true;
-        input.contentEditable = true;
+        input.contentEditable = 'plaintext-only';
         input.focus();
         oskMode = true;
         navigator.virtualKeyboard.show();
