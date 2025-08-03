@@ -1,5 +1,7 @@
 "use strict";
 
+if (window.top !== window) throw new Error("Disabled when embedded to prevent clickjacking attacks.");
+
 var legacyColor = true;
 var errorCode = 0;
 var version = "10.0.26100.3775";
@@ -547,10 +549,6 @@ function escapeRegExp(string) {
 }
 
 async function process(userinput = input.innerText, showCommand = true) {
-    if (window.top !== window) {
-        EchoLine('To prevent clickjacking commands are disabled when embedded.');
-        return
-    }
     const userinput_args = userinput.split('&');
     userinput = userinput_args[0].trim();
     for (let [index, val] of userinput_args.entries()) {
