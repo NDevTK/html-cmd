@@ -590,6 +590,7 @@ async function process(userinput = input.innerText, showCommand = true) {
                 EchoLine('The current time is:  ' + hours + ':' + time.getMinutes());
                 EchoLine("Enter the new time:")
             }
+            break;
         case "cls":
             clear();
             break;
