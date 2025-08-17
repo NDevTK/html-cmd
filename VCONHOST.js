@@ -580,6 +580,16 @@ async function process(userinput = input.innerText, showCommand = true) {
     }
     
     switch (args[0].toLowerCase()) {
+        case "time":
+            const time = new Date();
+            let hours = time.getHours()
+            if (hours < 10) hours = '0' + hours;
+            if (displayable.contains('/T')) {
+                EchoLine(hours + ':' + time.getMinutes());
+            } else {
+                EchoLine('The current time is:  ' + hours + ':' + time.getMinutes());
+                EchoLine("Enter the new time:")
+            }
         case "cls":
             clear();
             break;
