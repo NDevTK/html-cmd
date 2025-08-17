@@ -584,7 +584,7 @@ async function process(userinput = input.innerText, showCommand = true) {
             const time = new Date();
             let hours = time.getHours()
             if (hours < 10) hours = '0' + hours;
-            if (displayable.contains('/T')) {
+            if (displayable.includes('/T')) {
                 EchoLine(hours + ':' + time.getMinutes());
             } else {
                 EchoLine('The current time is:  ' + hours + ':' + time.getMinutes());
