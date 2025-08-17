@@ -4,7 +4,7 @@ if (window.top !== window) throw new Error("Disabled when embedded to prevent cl
 
 var legacyColor = true;
 var errorCode = 0;
-var version = "10.0.26100.3775";
+var version = "10.0.26100.4946";
 
 var oskMode = false;
 
