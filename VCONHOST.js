@@ -736,7 +736,7 @@ async function process(userinput = input.innerText, showCommand = true) {
                 break;
             case "exit":
             case "exit.exe":
-                close();
+                window.close();
             default:
                 if (!commands.has(args[0])) {
                     EchoLine("'" + args[0] + "' is not recognized as an internal or external command,\noperable program or batch file.");
