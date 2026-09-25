@@ -21,17 +21,17 @@ function OSK() {
 var environment = new Map()
 .set("ALLUSERSPROFILE", "C:\\ProgramData")
 .set("APPDATA", "C:\\Users\\NDevTK\\AppData\\Roaming")
-.set("CLIENTNAME", "ndev.tk")
+.set("CLIENTNAME", "ndevtk.local")
 .set("CommonProgramFiles", "C:\\Program Files\\Common Files")
 .set("CommonProgramFiles(x86)", "C:\\Program Files (x86)\\Common Files")
 .set("CommonProgramW6432", "C:\\Program Files\\Common Files")
-.set("COMPUTERNAME", "ndev.tk")
+.set("COMPUTERNAME", "ndevtk.local")
 .set("ComSpec", "C:\\Windows\\system32\\cmd.exe")
 .set("DriverData", "C:\\Windows\\System32\\Drivers\\DriverData")
 .set("HOMEDRIVE", "C:")
 .set("HOMEPATH", "\\Users\\NDevTK")
 .set("LOCALAPPDATA", "C:\\Users\\NDevTK\\AppData\\Local")
-.set("LOGONSERVER", "\\\\ndev.tk")
+.set("LOGONSERVER", "\\\\ndevtk.local")
 // Not perfect
 .set("NUMBER_OF_PROCESSORS", navigator.hardwareConcurrency || 4)
 .set("OS", "Windows_NT")
@@ -48,13 +48,13 @@ var environment = new Map()
 .set("PROMPT", "$P$G")
 .set("PSModulePath", "C:\\Users\\NDevTK\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules")
 .set("PUBLIC", "C:\\Users\\Public")
-.set("SESSIONNAME", "ndev.tk")
+.set("SESSIONNAME", "ndevtk.local")
 .set("SystemDrive", "C:")
 .set("SystemRoot", "C:\\Windows")
 .set("TEMP", "C:\\Users\\NDevTK\\AppData\\Local\\Temp")
 .set("TMP", "C:\\Users\\NDevTK\\AppData\\Local\\Temp")
-.set("USERDOMAIN", "ndev.tk")
-.set("USERDOMAIN_ROAMINGPROFILE", "ndev.tk")
+.set("USERDOMAIN", "ndevtk.local")
+.set("USERDOMAIN_ROAMINGPROFILE", "ndevtk.local")
 .set("USERNAME", "NDevTK")
 .set("USERPROFILE", "C:\\Users\\NDevTK")
 .set("windir", "C:\\Windows");
@@ -116,7 +116,7 @@ function getType() {
 
 async function HELPLookup(command) {
     let end = (command) ? "RAW/" + encodeURIComponent(command.toUpperCase()) : "Summary";
-    let resp = await fetch("https://cmddoc.ndev.tk/" + end);
+    let resp = await fetch("https://ndevtk.github.io/help-cmd/" + end);
     if (!resp.ok) return false;
     let text = await resp.text();
     return text;
